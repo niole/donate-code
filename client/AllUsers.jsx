@@ -45,9 +45,10 @@ AllUsers = React.createClass({
     }.bind(this));
   },
   render() {
+    const headerStyle = {padding: ".5em"};
     return (
       <div className="ui comments">
-        <h3 className="ui dividing header">Users</h3>
+        <h3 className="ui dividing header" style={headerStyle}>Users</h3>
         {this.getUsers()}
       </div>
     );

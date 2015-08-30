@@ -13,12 +13,13 @@ Tracker.autorun(function () {
 });
 
 Accounts.createUser = _.wrap(Accounts.createUser, function(createUser) {
-
   // Store the original arguments
   var args = _.toArray(arguments).slice(1),
       user = args[0],
       origCallback = args[1];
-
+  user.name = '';
+  console.log('user');
+  console.log(user);
   // Create a new callback function
   // Could also be defined elsewhere outside of this wrapped function
   // This is called on the client

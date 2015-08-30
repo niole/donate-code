@@ -4,11 +4,17 @@ Post = React.createClass({
     text: React.PropTypes.string,
     date: React.PropTypes.number
   },
+  editImg() {
+    event.preventDefault();
+    console.log('editimg');
+  },
   render() {
     return (
       <div className="comment">
-        <a className="avatar">
-          <i className="child icon"></i>
+        <a className="avatar" onClick={this.editImg}>
+          {Meteor.userId() ? Meteor.user().image ||
+          <i className="child icon"></i> :
+          <i className="child icon"></i>}
         </a>
         <div className="content">
           <a className="author">{this.props.user}</a>

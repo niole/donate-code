@@ -1,9 +1,7 @@
 PostNav = React.createClass({
-
   render() {
     const sideStyle = {top: "80px"};
     return (
-
         <form className="ui reply form">
           <div className="field">
             <textarea ref="postText"></textarea>
@@ -12,7 +10,6 @@ PostNav = React.createClass({
             <i className="icon edit"></i> Post it
           </div>
         </form>
-
     );
   },
   postIt(e) {

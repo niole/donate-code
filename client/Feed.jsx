@@ -12,9 +12,10 @@ Feed = React.createClass({
     });
   },
   render() {
+    const headerStyle = {padding: ".5em"};
     return (
       <span>
-        <h3 className="ui dividing header">Watching</h3>
+        <h3 className="ui dividing header" style={headerStyle}>Watching</h3>
         {this.Feeds()}
       </span>
     );

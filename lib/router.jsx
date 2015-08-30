@@ -4,10 +4,7 @@ FlowRouter.route('/', {
 //  },
   action: function() {
     React.render(<UserFeeds id={null}/>, document.body);
-//   ReactLayout.render(
-//      UserFeeds, {content: <App/>});
   }
-
 });
 
 FlowRouter.route('/:id', {
@@ -17,9 +14,6 @@ FlowRouter.route('/:id', {
 //  },
   action: function(params) {
     React.render(<UserFeeds id={params.id}/>, document.body);
-
-//  ReactLayout.render(
-//     UserFeeds, {content: <Feed/>});
- }
+  }
 });
 

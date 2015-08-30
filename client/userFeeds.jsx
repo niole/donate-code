@@ -36,25 +36,33 @@ UserFeeds = React.createClass({
     const div = document.getElementById('LoginButtons');
     Blaze.renderWithData(Template.loginButtons, {align: 'right'}, div);
   },
+  HomePage() {
+    var image = <i className="circular users icon"></i>;
+    return ([
+      <h2 className="ui center aligned icon header">
+        {image}
+        Welcome to Feed
+      </h2>
+     ]);
+  },
   render() {
     const feedStyle = {float: "left", marginLeft: "270px"};
     const buttonStyle = {float: "right"};
-
-     var feed = [];
-     if (Meteor.user()) {
-       feed.push(<Feed watchedposts={this.data.WatchedPosts}/>);
-     }
+    var feed = [];
+    if (Meteor.user()) {
+      feed.push(<Feed watchedposts={this.data.WatchedPosts}/>);
+    }
 
     return (
       <div>
         <div className="ui left fixed vertical menu">
           <PostNav/>
+          {this.HomePage()}
         </div>
         <div className="ui right fixed vertical menu">
-          <button className="ui basic button" style={buttonStyle}>
+          <span style={buttonStyle}>
             <div id="LoginButtons"/>
-             <i className="user icon"></i>
-          </button>
+          </span>
           <AllUsers users={this.data.AllUsers}/>
         </div>
         <div className="ui comments" style={feedStyle}>
