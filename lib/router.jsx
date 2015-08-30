@@ -2,14 +2,10 @@ FlowRouter.route('/', {
 // subscriptions: function() {
 //    this.register('allUsers', Meteor.subscribe('allUsers'));
 //  },
- triggersEnter: [function(context, redirect) {
-    if (Meteor.userId()) {
-      redirect('/'+Meteor.userId());
-    }
-  }],
   action: function() {
-   ReactLayout.render(
-      Main, {content: <App/>});
+    React.render(<UserFeeds id={null}/>, document.body);
+//   ReactLayout.render(
+//      UserFeeds, {content: <App/>});
   }
 
 });
@@ -20,9 +16,10 @@ FlowRouter.route('/:id', {
 //    this.register('usersFeed', Meteor.subscribe('usersFeed'));
 //  },
   action: function(params) {
-     console.log(params);
-     ReactLayout.render(
-        Main, {content: <UserFeeds/>});
-    }
+    React.render(<UserFeeds id={params.id}/>, document.body);
+
+//  ReactLayout.render(
+//     UserFeeds, {content: <Feed/>});
+ }
 });
 

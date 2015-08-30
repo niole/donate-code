@@ -4,6 +4,14 @@ Meteor.startup = function() {
   });
 };
 
+Tracker.autorun(function () {
+  if (Meteor.user()) {
+    FlowRouter.go('/'+Meteor.userId());
+  } else {
+    FlowRouter.go('/');
+  }
+});
+
 Accounts.createUser = _.wrap(Accounts.createUser, function(createUser) {
 
   // Store the original arguments
