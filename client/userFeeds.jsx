@@ -20,39 +20,35 @@ UserFeeds = React.createClass({
       });
     }
 
-  return {
-        UsersFeed: Feed,
-        WatchedPosts: WatchedPosts,
-        AllUsers: Users
-        };
+    return {
+          UsersFeed: Feed,
+          WatchedPosts: WatchedPosts,
+          AllUsers: Users
+          };
   },
   componentDidMount() {
     const div = document.getElementById('LoginButtons');
     Blaze.renderWithData(Template.atForm, {align: 'right'}, div);
   },
-  HomePage() {
-    var image = <i className="circular users icon"></i>;
-    return ([
-      <h2 className="ui center aligned icon header">
-        {image}
-        Welcome to Feed
-      </h2>
-     ]);
-  },
   render() {
-    const feedStyle = {float: "left", marginLeft: "270px"};
+    const feedStyle = {position: "absolute", left: "40%"};
     const buttonStyle = {float: "right"};
-    const headerStyle = {padding: ".5em"};
-    var feed = [];
+    let feed = [];
+    let sideLogo = [];
+
     if (Meteor.user()) {
       feed.push(<Feed watchedposts={this.data.WatchedPosts}/>);
+      sideLogo.push(<Logo/>);
+    } else {
+      feed.push(<Logo/>);
     }
+
 
     return (
       <div>
         <div className="ui left fixed vertical menu">
           <PostNav/>
-          {this.HomePage()}
+          {sideLogo}
         </div>
         <div className="ui right fixed vertical menu">
           <span style={buttonStyle}>
@@ -62,9 +58,9 @@ UserFeeds = React.createClass({
         </div>
         <div className="ui comments" style={feedStyle}>
           {feed}
-          <h3 className="ui dividing header" style={headerStyle}/>
-          <h3 className="ui dividing header" style={headerStyle}>Watching</h3>
         </div>
+        <WatchFooter/>
+
       </div>
     );
   }
