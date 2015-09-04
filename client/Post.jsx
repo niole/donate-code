@@ -11,7 +11,8 @@ Post = React.createClass({
   mixins: [ReactMeteorData],
   getMeteorData() {
     return {
-      Replies: Replies.find({postId: this.props.postId}).fetch()
+      Replies: Replies.find({postId: this.props.postId}).fetch(),
+      User: Meteor.users.findOne({ _id: this.props.user })
     };
   },
   editImg() {
@@ -23,6 +24,7 @@ Post = React.createClass({
     const replyText = this.refs.replytext.getDOMNode().value.trim();
     console.log('reply');
     console.log(replyText);
+
     Replies.insert({
         postId: this.props.postId,
         userId: Meteor.userId(),
@@ -41,6 +43,8 @@ Post = React.createClass({
     this.setState({reply: true});
   },
   render() {
+    let username = this.data.User.profile.name;
+    let date = (new Date(this.props.date)).toString();
     var replies = [];
     return (
       <div className="comment">
@@ -50,9 +54,9 @@ Post = React.createClass({
           <i className="child icon"></i>}
         </a>
         <div className="content">
-          <a className="author">{this.props.user}</a>
+          <a className="author">{username}</a>
           <div className="metadata">
-            <span className="date">{this.props.date}</span>
+            <span className="date">{date}</span>
           </div>
           <div className="text">
             <p>{this.props.text}</p>

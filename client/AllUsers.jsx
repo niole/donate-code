@@ -25,13 +25,13 @@ AllUsers = React.createClass({
   },
   getUsers() {
     return _.map(this.data.userData, function(user) {
-      const User = Meteor.users.find({_id: user._id}).fetch();
+      const User = Meteor.users.findOne({_id: user._id});
       console.log(User);
-      var userStatus = {message: user._id, watching: false};
+      var userStatus = {message: User.profile.name, watching: false};
       if (Meteor.user()) {
-        userStatus = {message: "click to follow "+user_id, watching: false};
+        userStatus = {message: "click to follow "+User.profile.name, watching: false};
         if (this.data.Watching.indexOf(user._id) > -1) {
-          userStatus = {message: "click to unfollow "+user_id, watching: true};
+          userStatus = {message: "click to unfollow "+User.profile.name, watching: true};
         }
       }
       return (

@@ -9,7 +9,8 @@ UserFeeds = React.createClass({
     var Feed = [];
 
     if (Meteor.user()) {
-      Feed = UsersFeed.find({_id: Meteor.userId()}).fetch()[0];
+      Feed = UsersFeed.findOne({_id: Meteor.userId()});
+      console.log(Feed);
       _.forEach(Feed.feeds, function(userId) {
         WatchedPosts = WatchedPosts.concat(
                         UserPosts.find({userId: userId}).fetch()
