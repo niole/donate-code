@@ -10,20 +10,13 @@ UserFeeds = React.createClass({
 
     if (Meteor.user()) {
       Feed = UsersFeed.findOne({_id: Meteor.userId()});
-      console.log(Feed);
       _.forEach(Feed.feeds, function(userId) {
         WatchedPosts = WatchedPosts.concat(
                         UserPosts.find({userId: userId}).fetch()
                         );
       });
       WatchedPosts.sort(function(a, b) {
-        if (a.createdAt > b.createdAt) {
-          return -1;
-        }
-        if (a.createdAt < b.createdAt) {
-          return 1;
-        }
-        return 0;
+        return a.createdAt - b.createdAt;
       });
     }
 
@@ -49,6 +42,7 @@ UserFeeds = React.createClass({
   render() {
     const feedStyle = {float: "left", marginLeft: "270px"};
     const buttonStyle = {float: "right"};
+    const headerStyle = {padding: ".5em"};
     var feed = [];
     if (Meteor.user()) {
       feed.push(<Feed watchedposts={this.data.WatchedPosts}/>);
@@ -68,6 +62,8 @@ UserFeeds = React.createClass({
         </div>
         <div className="ui comments" style={feedStyle}>
           {feed}
+          <h3 className="ui dividing header" style={headerStyle}/>
+          <h3 className="ui dividing header" style={headerStyle}>Watching</h3>
         </div>
       </div>
     );

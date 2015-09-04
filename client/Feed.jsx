@@ -2,6 +2,12 @@ Feed = React.createClass({
   propTypes: {
     watchedposts: React.PropTypes.array
   },
+  componentDidMount() {
+    $("body").animate({ scrollTop: $("#feedContainer").height() }, 1000);
+  },
+  componentDidUpdate() {
+    $("body").animate({ scrollTop: $("#feedContainer").height() }, 1000);
+  },
   Feeds() {
     return _.map(this.props.watchedposts, function(post) {
       return <Post
@@ -13,12 +19,10 @@ Feed = React.createClass({
     });
   },
   render() {
-    const headerStyle = {padding: ".5em"};
     return (
-      <span>
-        <h3 className="ui dividing header" style={headerStyle}>Watching</h3>
+      <div id="feedContainer">
         {this.Feeds()}
-      </span>
+      </div>
     );
   }
 });
