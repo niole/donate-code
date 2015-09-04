@@ -6,7 +6,7 @@ AllUsers = React.createClass({
   getMeteorData() {
     var Watching = [];
     if (Meteor.user()) {
-      Watching = UsersFeed.find({_id: Meteor.userId()}).fetch()[0].feeds;
+      Watching = UsersFeed.findOne({_id: Meteor.userId()}).feeds;
     }
     return {
             userData: this.props.users,
@@ -26,7 +26,6 @@ AllUsers = React.createClass({
   getUsers() {
     return _.map(this.data.userData, function(user) {
       const User = Meteor.users.findOne({_id: user._id});
-      console.log(User);
       var userStatus = {message: User.profile.name, watching: false};
       if (Meteor.user()) {
         userStatus = {message: "click to follow "+User.profile.name, watching: false};
@@ -46,10 +45,15 @@ AllUsers = React.createClass({
         );
     }.bind(this));
   },
+  logOut() {
+    event.preventDefault();
+    AccountsTemplates.logout();
+  },
   render() {
     const headerStyle = {padding: ".5em"};
     return (
       <div className="ui comments">
+        {Meteor.user() ? <a style={{float: "right"}} href='/' onClick={this.logOut}>logout</a> : <span/>}
         <h3 className="ui dividing header" style={headerStyle}>Users</h3>
         {this.getUsers()}
       </div>
