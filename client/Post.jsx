@@ -1,14 +1,47 @@
 Post = React.createClass({
   propTypes: {
+    postId: React.PropTypes.string,
     user: React.PropTypes.string,
     text: React.PropTypes.string,
     date: React.PropTypes.number
+  },
+  getInitialState() {
+    return { reply: false };
+  },
+  mixins: [ReactMeteorData],
+  getMeteorData() {
+    return {
+      Replies: Replies.find({postId: this.props.postId}).fetch()
+    };
   },
   editImg() {
     event.preventDefault();
     console.log('editimg');
   },
+  addReply() {
+    event.preventDefault();
+    const replyText = this.refs.replytext.getDOMNode().value.trim();
+    console.log('reply');
+    console.log(replyText);
+    Replies.insert({
+        postId: this.props.postId,
+        userId: Meteor.userId(),
+        reply: {
+          text: replyText
+        }
+    });
+  },
+  displayReplies() {
+    return _.map(this.data.Replies, function(reply) {
+      return <li>{reply.reply.text}</li>;
+    });
+  },
+  showReplyBox() {
+    event.preventDefault();
+    this.setState({reply: true});
+  },
   render() {
+    var replies = [];
     return (
       <div className="comment">
         <a className="avatar" onClick={this.editImg}>
@@ -25,7 +58,20 @@ Post = React.createClass({
             <p>{this.props.text}</p>
           </div>
           <div className="actions">
-            <a className="reply">Reply</a>
+            {this.state.reply ?
+            <span>
+              <a className="reply" onClick={this.addReply}>Reply</a>
+              <div className="ui form">
+                <div className="field">
+                  <textarea rows="2" ref="replytext"></textarea>
+                </div>
+              </div>
+             </span> :
+            <a className="reply" onClick={this.showReplyBox}>Reply</a>
+            }
+            <ul>
+              {this.displayReplies()}
+            </ul>
           </div>
         </div>
       </div>

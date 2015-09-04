@@ -2,6 +2,15 @@ Meteor.startup = function() {
   Accounts.ui.config({
    passwordSignupFields: "EMAIL_ONLY"
   });
+
+  AccountsTemplates.addField({
+      _id: 'name',
+      type: 'text',
+      displayName: "Name",
+      func: function(value){return value !== 'Full Name';},
+      errStr: 'Only "Full Name" allowed!',
+  });
+
 };
 
 Tracker.autorun(function () {
@@ -17,9 +26,6 @@ Accounts.createUser = _.wrap(Accounts.createUser, function(createUser) {
   var args = _.toArray(arguments).slice(1),
       user = args[0],
       origCallback = args[1];
-  user.name = '';
-  console.log('user');
-  console.log(user);
   // Create a new callback function
   // Could also be defined elsewhere outside of this wrapped function
   // This is called on the client

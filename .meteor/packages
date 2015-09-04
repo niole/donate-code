@@ -11,5 +11,5 @@ kadira:flow-router
 accounts-password
 semantic:ui-css
 kadira:react-layout
-accounts-ui
 autopublish
+useraccounts:bootstrap

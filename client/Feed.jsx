@@ -5,6 +5,7 @@ Feed = React.createClass({
   Feeds() {
     return _.map(this.props.watchedposts, function(post) {
       return <Post
+              postId={post._id}
               user={post.userId}
               date={post.createdAt}
               text={post.data.text}

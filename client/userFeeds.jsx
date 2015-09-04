@@ -34,7 +34,7 @@ UserFeeds = React.createClass({
   },
   componentDidMount() {
     const div = document.getElementById('LoginButtons');
-    Blaze.renderWithData(Template.loginButtons, {align: 'right'}, div);
+    Blaze.renderWithData(Template.atForm, {align: 'right'}, div);
   },
   HomePage() {
     var image = <i className="circular users icon"></i>;
