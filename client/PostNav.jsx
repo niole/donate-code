@@ -2,7 +2,7 @@ PostNav = React.createClass({
   render() {
     const sideStyle = {top: "80px"};
     return (
-        <form className="ui reply form">
+        <form onSubmit={this.postIt} className="ui reply form">
           <div className="field">
             <textarea ref="postText"></textarea>
           </div>
@@ -15,6 +15,8 @@ PostNav = React.createClass({
   postIt(e) {
     e.preventDefault();
     const postText = this.refs.postText.getDOMNode().value;
+    this.refs.postText.getDOMNode().value = '';
+
     if (Meteor.user()) {
       let d = new Date();
       const t = d.getTime();
