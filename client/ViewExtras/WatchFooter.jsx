@@ -1,6 +1,6 @@
 WatchFooter = React.createClass({
   render() {
-    const footerStyle = {position: "absolute",
+    const footerStyle = {position: "fixed",
                          left: "40%",
                          bottom: "0%",
                          padding: "1em"};

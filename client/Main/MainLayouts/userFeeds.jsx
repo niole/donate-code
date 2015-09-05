@@ -60,7 +60,6 @@ UserFeeds = React.createClass({
           {feed}
         </div>
         <WatchFooter/>
-
       </div>
     );
   }
