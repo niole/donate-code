@@ -50,6 +50,7 @@ ProfileToggle = React.createClass({
         <MiniProfiles
         profiledata={this.props.userData.miniProfiles}
         activeprofile={this.state.menuToggle[0]}
+        profiletype={this.props.profiletype}
         />
       </span>
 
