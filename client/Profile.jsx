@@ -37,6 +37,7 @@ Profile = React.createClass({
 
         <div className="second two-third-panel">
           <OverView
+            id={this.data._id}
             profiledata={this.data.profile}
             profiletype={this.props.usertype}
             usertype={this.props.usertype}
