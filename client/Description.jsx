@@ -9,7 +9,13 @@ Description  = React.createClass({
   },
   render() {
     return (
-      <div className="over-views">
+      <div id="bio-section" className="over-views">
+        <div className="inline">
+          <h1>About</h1>
+          {(this.props.usertype === this.props.profiletype) ?
+            <div id="bio-edit" className="edit tiny-label">edit</div> : <span/>}
+        </div>
+
         {this.displayDescription(this.props.description)}
       </div>
     );

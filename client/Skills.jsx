@@ -11,7 +11,13 @@ Skills = React.createClass({
   },
   render() {
     return (
-      <div className="over-views">
+      <div id="skills-section" className="over-views">
+        <div className="inline">
+          <h1>Skills</h1>
+          {(this.props.usertype === this.props.profiletype) ?
+            <div id="skills-edit" className="edit tiny-label">edit</div> : <span/>}
+        </div>
+
         {this.displaySkills(this.props.skilldata)}
       </div>
     );

@@ -8,6 +8,14 @@ img {
   max-height: 100%;
 }
 
+h1 {
+  display: inline;
+}
+
+.inline {
+  display: inline;
+}
+
 .first {
   float: left;
 }
@@ -48,6 +56,29 @@ img {
   padding: 0em 1em;
   font-size: small;
 }
+
+.tiny-label.edit {
+  opacity: .5;
+  margin-left: 40px;
+}
+
+/*#link-edit.tiny-label.edit {
+  margin-left: 40px;
+}*/
+
+#link-section:hover #link-edit.tiny-label.edit {
+  opacity: .9;
+}
+
+#bio-section:hover #bio-edit.tiny-label.edit {
+  opacity: .9;
+}
+
+
+#skills-section:hover #skills-edit.tiny-label.edit {
+  opacity: .9;
+}
+
 
 .title-toggle {
   height: 15%;

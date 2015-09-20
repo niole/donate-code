@@ -5,14 +5,23 @@ Links = React.createClass({
     profiletype: React.PropTypes.string.isRequired
   },
   displayLinks(data) {
-    return _.map(data, link => {
-      return <a href={link}>{link}</a>;
-    });
+    if (data.length > 0) {
+      return _.map(data, link => {
+        return <a href={link}>{link}</a>;
+      });
+    }
+    return <p>add a link</p>;
   },
   render() {
     return (
       <span>
-        <div className="over-views">
+        <div id="link-section" className="over-views">
+          <div className="inline">
+            <h1>Links</h1>
+            {(this.props.usertype === this.props.profiletype) ?
+              <div id="link-edit" className="edit tiny-label">edit</div> : <span/>}
+          </div>
+
           {this.displayLinks(this.props.linkdata)}
         </div>
       </span>
