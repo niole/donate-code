@@ -1,4 +1,8 @@
 MainLayout = React.createClass({
+  LogOut() {
+    event.preventDefault();
+    AccountsTemplates.logout();
+  },
   render() {
     return (
       <div>
@@ -16,7 +20,7 @@ MainLayout = React.createClass({
                 <i className="search link icon"></i>
               </div>
             </div>
-            <a className="ui item">
+            <a className="ui item" onClick={this.LogOut}>
               Logout
             </a>
           </div>
