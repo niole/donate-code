@@ -98,6 +98,10 @@ h1 {
   float: right;
 }
 
+.skill-container {
+  margin-top: 10px;
+}
+
 .text-container {
   padding: 1em;
 }

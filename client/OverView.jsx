@@ -19,7 +19,7 @@ OverView = React.createClass({
             id={this.props.id}
             usertype={this.props.usertype}
             profiletype={this.props.profiletype}
-            skilldata={this.props.profiledata.skills}
+            skilldata={this.props.profiledata.devSkills}
           />
         </div>
         <Description
