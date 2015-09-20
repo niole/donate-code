@@ -1,1 +1,20 @@
 /* CSS declarations go here */
+.register-text {
+  display: inline;
+}
+
+.text-container {
+  padding: 1em;
+}
+
+#login-container {
+  width: 60%;
+  position: fixed;
+  left: 20%;
+}
+
+#right-charity-checkbox {
+  float:right;
+}
+
+
