@@ -25,17 +25,15 @@ Profile = React.createClass({
       <div className="app-container" style={containerStyle}>
 
         <div className="first one-third-panel">
-
           <ProfileImage profileimg={this.data.profile.image}/>
-
           <div className="profile-feed-container">
-            <TitleToggle
+
+            <ProfileToggle
             profiletype={this.props.usertype}
             usertype={this.props.usertype}
+            userData={this.data}
             />
-            <div className="miniprofile-container">
-             and user feed thing
-            </div>
+
           </div>
         </div>
 

@@ -1,7 +1,8 @@
-TitleToggle = React.createClass({
+ProfileToggle = React.createClass({
   propTypes: {
     usertype: React.PropTypes.string.isRequired,
-    profiletype: React.PropTypes.string.isRequired
+    profiletype: React.PropTypes.string.isRequired,
+    userData: React.PropTypes.object.isRequired
   },
   getInitialState() {
     return { menuToggle: [true, false]};
@@ -42,9 +43,16 @@ TitleToggle = React.createClass({
   },
   render() {
     return (
-      <div className="title-toggle">
-        {this.displayToggle(this.props.profiletype, this.props.usertype)}
-      </div>
+      <span>
+        <div className="title-toggle">
+          {this.displayToggle(this.props.profiletype, this.props.usertype)}
+        </div>
+        <MiniProfiles
+        profiledata={this.props.userData.miniProfiles}
+        activeprofile={this.state.menuToggle[0]}
+        />
+      </span>
+
     );
   }
 });
