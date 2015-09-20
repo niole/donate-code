@@ -35,7 +35,7 @@ LoginSignup = React.createClass({
   render() {
     AccountsTemplates.setState(this.props.state);
     return (
-      <div>
+      <div className="app-container">
         <div id="login-container">
           <div id="LoginButtons"/>
           {(this.props.state === "signIn") ?

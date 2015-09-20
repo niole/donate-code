@@ -1,6 +1,61 @@
 /* CSS declarations go here */
+/*.app-container {
+position:fixed !important;
+position:absolute;
+top:0;
+right:0;
+bottom:0;
+left:0;
+}*/
+
+div {
+  border: 1px solid black;
+}
+
+.first {
+  float: left;
+}
+
+.one-third-panel {
+  width: 25%;
+  height: 100%;
+}
+
+.profile-img-container {
+  width: 100%;
+  height: 25%;
+}
+
+.profile-feed-container {
+  width: 100%;
+  height: 75%;
+}
+
+.over-views {
+  width: 100%;
+  height: 50%;
+}
+
+.short-views {
+  width: 100%;
+  height: 37%;
+}
+
+.title-toggle {
+  height: 15%;
+}
+
+.two-third-panel {
+  width: 75%;
+  height: 100%;
+}
+
 .register-text {
   display: inline;
+}
+
+.second {
+  float: right;
 }
 
 .text-container {
