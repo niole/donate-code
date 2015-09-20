@@ -5,24 +5,35 @@ LoginSignup = React.createClass({
   componentDidMount() {
     const div = document.getElementById('LoginButtons');
     Blaze.renderWithData(Template.atForm, {align: 'right'}, div);
+    $('#login-container').click( function() {
+      let charity = $('#login-container').find("input[value=charity]"),
+          developer = $('#login-container').find("input[value=developer]");
+      if (developer.is(":checked")) {
+        Session.set('userType', 'developer');
+      }
+      if (charity.is(":checked")) {
+        Session.set('userType', 'charity');
+      }
+    });
   },
-  getCheckBoxes() {
-    if (this.props.state === "signUp") {
+  getCheckBoxes(state) {
+    if (state === "signUp") {
       return (
-          <div id="charity-dev-checkboxes">
-            <div className="ui checkbox">
-              <input type="checkbox" name="example"/>
-              <label>Developer</label>
-            </div>
-            <div id="right-charity-checkbox" className="ui checkbox">
-              <input type="checkbox" name="example"/>
-              <label>Charity</label>
-            </div>
+        <div id="ui form charity-dev-checkboxes">
+          <div className="ui radio checkbox">
+            <input type="radio" name="usertypes" value="developer"/>
+            <label>Developer</label>
           </div>
+          <div id="right-charity-checkbox" className="ui radio checkbox">
+            <input type="radio" name="usertypes" value="charity" defaultChecked/>
+            <label>Charity</label>
+          </div>
+        </div>
       );
    }
   },
   render() {
+    AccountsTemplates.setState(this.props.state);
     return (
       <div>
         <div id="login-container">
@@ -30,7 +41,7 @@ LoginSignup = React.createClass({
           {(this.props.state === "signIn") ?
             <div className="text-container"><p className="register-text">don't have an account? </p><a href="/signup">register</a></div> :
             <div className="text-container"><p className="register-text">have an account? </p> <a href="/">sign in</a></div>}
-          {this.getCheckBoxes()}
+          {this.getCheckBoxes(this.props.state)}
         </div>
       </div>
     );
