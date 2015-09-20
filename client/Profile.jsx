@@ -5,14 +5,18 @@ Profile = React.createClass({
   mixins: [ReactMeteorData],
   getMeteorData() {
     let userData;
-    switch (this.props.usertype) {
-      case 'developer':
-        userData = Developers.findOne({devId: Meteor.userId()});
-        break;
-      case 'charity':
-        userData = Charities.findOne({charityId: Meteor.userId()});
-        break;
-    }
+      switch (this.props.usertype) {
+        case 'developer':
+          userData = Developers.findOne({devId: Meteor.userId()});
+          break;
+        case 'charity':
+          userData = Charities.findOne({charityId: Meteor.userId()});
+          break;
+        case 'project':
+          console.log('still need to handle project case');
+          break;
+      }
+    ;
     return userData;
   },
   render() {
@@ -21,12 +25,14 @@ Profile = React.createClass({
       <div className="app-container" style={containerStyle}>
 
         <div className="first one-third-panel">
+
           <ProfileImage profileimg={this.data.profile.image}/>
+
           <div className="profile-feed-container">
-            <div className="title-toggle">
-              title toggle
-            </div>
+            <TitleToggle usertype={this.props.usertype}/>
+            <div className="miniprofile-container">
              and user feed thing
+            </div>
           </div>
         </div>
 
