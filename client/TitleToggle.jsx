@@ -1,9 +1,10 @@
 TitleToggle = React.createClass({
+  propTypes: {
+    usertype: React.PropTypes.string.isRequired,
+    profiletype: React.PropTypes.string.isRequired
+  },
   getInitialState() {
     return { menuToggle: [true, false]};
-  },
-  propTypes: {
-    usertype: React.PropTypes.string.isRequired
   },
   Toggle(pos) {
     this.setState({menuToggle:
@@ -15,9 +16,8 @@ TitleToggle = React.createClass({
       })
     });
   },
-  displayToggle(usertype) {
-    if (usertype === 'developer' || usertype === 'project') {
-      console.log('dev');
+  displayToggle(profiletype, usertype) {
+    if (profiletype === 'developer' || profiletype === 'project') {
       return (
         <div className="ui secondary pointing menu">
           <a className={this.state.menuToggle[0] ? "active item" : "item"}
@@ -31,14 +31,19 @@ TitleToggle = React.createClass({
         </div>
       );
     }
-    if (usertype === 'charity') {
-      console.log('charity');
+    if (profiletype === 'charity') {
+      return (
+        <span>
+          <h1 id="project-toggle">Projects</h1>
+          {(usertype === 'charity') ? <div className="tiny-label">edit</div> : <span/>}
+        </span>
+      );
     }
   },
   render() {
     return (
       <div className="title-toggle">
-        {this.displayToggle(this.props.usertype)}
+        {this.displayToggle(this.props.profiletype, this.props.usertype)}
       </div>
     );
   }

@@ -29,7 +29,10 @@ Profile = React.createClass({
           <ProfileImage profileimg={this.data.profile.image}/>
 
           <div className="profile-feed-container">
-            <TitleToggle usertype={this.props.usertype}/>
+            <TitleToggle
+            profiletype={this.props.usertype}
+            usertype={this.props.usertype}
+            />
             <div className="miniprofile-container">
              and user feed thing
             </div>
