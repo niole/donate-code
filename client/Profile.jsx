@@ -27,28 +27,20 @@ Profile = React.createClass({
         <div className="first one-third-panel">
           <ProfileImage profileimg={this.data.profile.image}/>
           <div className="profile-feed-container">
-
             <ProfileToggle
-            profiletype={this.props.usertype}
-            usertype={this.props.usertype}
-            userData={this.data}
+              profiletype={this.props.usertype}
+              usertype={this.props.usertype}
+              userData={this.data}
             />
-
           </div>
         </div>
 
         <div className="second two-third-panel">
-          <div className="short-views">
-            <div className="over-views">
-              about sections
-            </div>
-            <div className="over-views">
-              about sections
-            </div>
-          </div>
-          <div className="over-views">
-            about sections
-          </div>
+          <OverView
+            profiledata={this.data.profile}
+            profiletype={this.props.usertype}
+            usertype={this.props.usertype}
+          />
         </div>
       </div>
     );

@@ -53,7 +53,6 @@ MiniProfiles = React.createClass({
   render() {
     return (
       <div className="miniprofile-container">
-         and user feed thing
          {this.displayProfiles(this.props.activeprofile, this.data.Pending, this.data.Accepted)}
       </div>
     );
