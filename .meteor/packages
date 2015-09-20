@@ -12,4 +12,7 @@ accounts-password
 semantic:ui-css
 kadira:react-layout
 autopublish
-useraccounts:bootstrap
+useraccounts:semantic-ui
+aldeed:simple-schema
+aldeed:collection2
+kadira:blaze-layout

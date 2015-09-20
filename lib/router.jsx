@@ -1,19 +1,7 @@
-FlowRouter.route('/', {
-// subscriptions: function() {
-//    this.register('allUsers', Meteor.subscribe('allUsers'));
-//  },
+FlowRouter.route("/", {
   action: function() {
-    React.render(<UserFeeds id={null}/>, document.body);
+    ReactLayout.render(MainLayout, {
+      content: <LoginSignup/>
+    });
   }
 });
-
-FlowRouter.route('/:id', {
-// subscriptions: function() {
-//    this.register('allUsers', Meteor.subscribe('allUsers'));
-//    this.register('usersFeed', Meteor.subscribe('usersFeed'));
-//  },
-  action: function(params) {
-    React.render(<UserFeeds id={params.id}/>, document.body);
-  }
-});
-
