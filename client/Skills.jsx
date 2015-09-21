@@ -80,14 +80,14 @@ Skills = React.createClass({
       <div id="skills-section" className="over-views">
         <div className="inline">
           <h1>Skills</h1>
-          {(this.props.usertype === this.props.profiletype) ?
-            <div id="skills-edit" className="edit tiny-label"
-              onClick={this.editMode.bind(null, !this.state.edit)}
-             >
-              {edit}
-            </div> :
-            <span/>}
-            <br/>
+          <EditButton
+            id={this.props.id}
+            usertype={this.props.usertype}
+            profiletype={this.props.profiletype}
+            componenttype={'skills'}
+            text={null}
+          />
+          <br/>
         </div>
 
         {this.displaySkills(this.props.skilldata, this.state.edit, this.props.profiletype)}

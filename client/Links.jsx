@@ -18,8 +18,13 @@ Links = React.createClass({
         <div id="link-section" className="over-views">
           <div className="inline">
             <h1>Links</h1>
-            {(this.props.usertype === this.props.profiletype) ?
-              <div id="link-edit" className="edit tiny-label">edit</div> : <span/>}
+            <EditButton
+              id={this.props.id}
+              usertype={this.props.usertype}
+              profiletype={this.props.profiletype}
+              componenttype={'links'}
+              text={null}
+            />
           </div>
 
           {this.displayLinks(this.props.linkdata)}
