@@ -17,11 +17,6 @@ FlowRouter.route("/signup", {
 });
 
 FlowRouter.route("/profile/:userType", {
-  triggersEnter: [function(context, redirect) {
-    if (!Meteor.user()) {
-      redirect('/');
-    }
-  }],
   action: function(params) {
     ReactLayout.render(MainLayout, {
       content: <Profile usertype={params.userType}/>

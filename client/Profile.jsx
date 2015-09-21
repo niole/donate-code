@@ -19,6 +19,12 @@ Profile = React.createClass({
     ;
     return userData;
   },
+  componentDidMount() {
+    console.log('componentdid moun');
+    if (!Meteor.user()) {
+      FlowRouter.go('/');
+    }
+  },
   render() {
     let containerStyle = {height: $(window).height()};
     return (
