@@ -16,11 +16,11 @@ FlowRouter.route("/signup", {
   }
 });
 
-FlowRouter.route("/profile/:profileType/:userId", {
+FlowRouter.route("/profile/:profileType/:profileId", {
   action: function(params) {
     ReactLayout.render(MainLayout, {
       content: <Profile
-                userid={params.userId}
+                profileid={params.profileId}
                 profiletype={params.profileType}
                 />
     });

@@ -1,32 +1,35 @@
 Links = React.createClass({
   propTypes: {
     linkdata: React.PropTypes.array.isRequired,
-    usertype: React.PropTypes.string.isRequired,
-    profiletype: React.PropTypes.string.isRequired
+    profiletype: React.PropTypes.string.isRequired,
+    profileid: React.PropTypes.string.isRequired,
+    userid: React.PropTypes.string.isRequired
   },
-  removeLink(index, user, profile, links) {
+  removeLink(index, user, profile, profiletype, links) {
+    console.log('remove link');
     if (user === profile) {
+      console.log('user is profile');
       let updateSkills;
       if (index < links.length) {
         updateSkills = links.slice(0,index).concat(links.slice(index+1,links.length));
       } else {
         console.error('you are trying to delete something thats not in the skill array');
       }
-      if (profile === 'project') {
+      if (profiletype === 'project') {
         //update some data
       }
-      if (profile === 'charity') {
+      if (profiletype === 'charity') {
         if (updateSkills) {
           Charities.update(
-             { _id: this.props.id },
+             { _id: user },
              { $set: {"profile.links": updateSkills }}
           );
         }
       }
-      if (profile === 'developer') {
+      if (profiletype === 'developer') {
         if (updateSkills) {
           Developers.update(
-             { _id: this.props.id },
+             { _id: user },
              { $set: {"profile.links": updateSkills }}
           );
         }
@@ -43,7 +46,7 @@ Links = React.createClass({
                 {link}
             </a>
             <i className="delete icon delete-link"
-              onClick={this.removeLink.bind(null, i, this.props.usertype, this.props.profiletype, data)}
+              onClick={this.removeLink.bind(null, i, this.props.userid, this.props.profileid,this.props.profiletype, data)}
             >
             </i>
           </div>
@@ -59,8 +62,8 @@ Links = React.createClass({
           <div className="inline">
             <h1>Links</h1>
             <EditButton
-              id={this.props.id}
-              usertype={this.props.usertype}
+              userid={this.props.userid}
+              profileid={this.props.profileid}
               profiletype={this.props.profiletype}
               componenttype={'links'}
               text={null}

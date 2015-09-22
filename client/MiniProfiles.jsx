@@ -1,3 +1,10 @@
+/*
+ * Component shows pending or active devs if profile is project
+ * and shows pending or active projects if profile is developer.
+ * Component receives driving state (props.activeprofile) from ProfileToggle
+ * component.
+ */
+
 MiniProfiles = React.createClass({
   propTypes: {
     activeprofile: React.PropTypes.bool.isRequired,
@@ -38,14 +45,18 @@ MiniProfiles = React.createClass({
     if (active) {
       if (accepted.length > 0) {
         return _.map(accepted, profile => {
-          return <MiniProfile profiledata={profile.profile}/>;
+          return <MiniProfile
+                  profiledata={profile.profile}
+                  />;
         });
       }
       return <p>nothing active</p>;
     }
     if (pending.length > 0) {
       return _.map(pending, profile => {
-        return <MiniProfile profiledata={profile.profile}/>;
+        return <MiniProfile
+                profiledata={profile.profile}
+                />;
       });
     }
     return <p>nothing pending</p>;

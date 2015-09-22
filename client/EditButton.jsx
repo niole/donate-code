@@ -1,7 +1,7 @@
 EditButton = React.createClass({
   propTypes: {
-    id: React.PropTypes.string.isRequired,
-    usertype: React.PropTypes.string.isRequired,
+    userid: React.PropTypes.string.isRequired,
+    profileid: React.PropTypes.string.isRequired,
     profiletype: React.PropTypes.string.isRequired,
     componenttype: React.PropTypes.string.isRequired,
     text: React.PropTypes.string
@@ -9,7 +9,7 @@ EditButton = React.createClass({
   getInitialState() {
     return { edit: false };
   },
-  editMode(edit, component, profile) {
+  editMode(edit, component, profile, profileid) {
     event.preventDefault();
     if (!edit) {
       //save text in textarea
@@ -19,7 +19,7 @@ EditButton = React.createClass({
         if (component === 'skills') {
           if (text) {
             Projects.update(
-               { _id: this.props.id },
+               { _id: this.props.profileid },
                { $push: {"profile.skills": text }}
             );
           }
@@ -27,7 +27,7 @@ EditButton = React.createClass({
         if (component === 'links') {
           if (text) {
             Projects.update(
-               { _id: this.props.id },
+               { _id: this.props.profileid },
                { $push: {"profile.links": text }}
             );
           }
@@ -35,7 +35,7 @@ EditButton = React.createClass({
         if (component === 'bio') {
           if (text) {
             Projects.update(
-               { _id: this.props.id },
+               { _id: this.props.profileid },
                { $set: {"profile.description": text }}
             );
           }
@@ -45,7 +45,7 @@ EditButton = React.createClass({
         if (component === 'skills') {
           if (text) {
             Charities.update(
-               { _id: this.props.id },
+               { _id: this.props.profileid },
                { $push: {"profile.skills": text }}
             );
           }
@@ -53,7 +53,7 @@ EditButton = React.createClass({
         if (component === 'links') {
           if (text) {
             Charities.update(
-               { _id: this.props.id },
+               { _id: this.props.profileid },
                { $push: {"profile.links": text }}
             );
           }
@@ -61,7 +61,7 @@ EditButton = React.createClass({
         if (component === 'bio') {
           if (text) {
             Charities.update(
-               { _id: this.props.id },
+               { _id: this.props.profileid },
                { $set: {"profile.description": text }}
             );
           }
@@ -71,7 +71,7 @@ EditButton = React.createClass({
         if (component === 'skills') {
           if (text) {
             Developers.update(
-               { _id: this.props.id },
+               { _id: this.props.profileid },
                { $push: {"profile.devSkills": text }}
             );
           }
@@ -79,7 +79,7 @@ EditButton = React.createClass({
         if (component === 'links') {
           if (text) {
             Developers.update(
-               { _id: this.props.id },
+               { _id: this.props.profileid },
                { $push: {"profile.links": text }}
             );
           }
@@ -87,7 +87,7 @@ EditButton = React.createClass({
         if (component === 'bio') {
           if (text) {
             Developers.update(
-               { _id: this.props.id },
+               { _id: this.props.profileid },
                { $set: {"profile.description": text }}
             );
           }
@@ -96,12 +96,12 @@ EditButton = React.createClass({
     }
     this.setState({ edit: edit });
   },
-  showButton(user, profile, edit) {
+  showButton(profile, user, profiletype, edit, componenttype) {
     let Edit = edit ? 'save' : 'edit';
     if (user === profile) {
       return (
           <div id="skills-edit" className="edit tiny-label"
-            onClick={this.editMode.bind(null, !this.state.edit, this.props.componenttype, this.props.profiletype)}
+            onClick={this.editMode.bind(null, !edit, componenttype, profiletype, profile)}
            >
             {Edit}
           </div>
@@ -133,11 +133,9 @@ EditButton = React.createClass({
     }
   },
   render() {
-    console.log('this.state.edit');
-    console.log(this.state.edit);
     return (
       <div>
-        {this.showButton(this.props.usertype, this.props.profiletype, this.state.edit)}
+        {this.showButton(this.props.profileid,this.props.userid, this.props.profiletype, this.state.edit, this.props.componenttype)}
         {this.showInput(this.state.edit, this.props.componenttype, this.props.text)}
       </div>
     );

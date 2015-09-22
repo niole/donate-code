@@ -1,7 +1,16 @@
+/*
+ * Component controls the view in MiniProfiles component.
+ * If props.profiletype is developer or project, allows
+ * user to toggle between relevant active and pending MiniProfiles.
+ * If is charity, displays a 'Projects' title with an optional
+ * 'add project' button if charity profile belongs to loggedin user.
+ */
+
 ProfileToggle = React.createClass({
   propTypes: {
-    usertype: React.PropTypes.string.isRequired,
     profiletype: React.PropTypes.string.isRequired,
+    userid: React.PropTypes.string.isRequired,
+    profileid: React.PropTypes.string.isRequired,
     userData: React.PropTypes.object.isRequired
   },
   getInitialState() {
@@ -17,7 +26,7 @@ ProfileToggle = React.createClass({
       })
     });
   },
-  displayToggle(profiletype, usertype) {
+  displayToggle(profiletype, profileid, userid) {
     if (profiletype === 'developer' || profiletype === 'project') {
       let headerText;
       if (profiletype === 'developer') {
@@ -45,7 +54,7 @@ ProfileToggle = React.createClass({
       return (
         <span>
           <h1 id="project-toggle">Projects</h1>
-          {(usertype === 'charity') ? <div className="tiny-label">edit</div> : <span/>}
+          {(profileid === userid) ? <div className="tiny-label">edit</div> : <span/>}
         </span>
       );
     }
@@ -54,7 +63,7 @@ ProfileToggle = React.createClass({
     return (
       <span>
         <div className="title-toggle">
-          {this.displayToggle(this.props.profiletype, this.props.usertype)}
+          {this.displayToggle(this.props.profiletype, this.props.profileid, this.props.userid)}
         </div>
         <MiniProfiles
         profiledata={this.props.userData.miniProfiles}
