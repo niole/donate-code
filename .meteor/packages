@@ -9,10 +9,10 @@ insecure
 react
 kadira:flow-router
 accounts-password
-semantic:ui-css
 kadira:react-layout
 autopublish
 useraccounts:semantic-ui
 aldeed:simple-schema
 aldeed:collection2
 kadira:blaze-layout
+semantic:ui-css

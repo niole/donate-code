@@ -5,30 +5,6 @@ Skills = React.createClass({
     usertype: React.PropTypes.string.isRequired,
     profiletype: React.PropTypes.string.isRequired
   },
-  getInitialState() {
-    return { edit: false };
-  },
-  editMode(mode) {
-    event.preventDefault();
-    if (this.state.edit) {
-      //save text in textarea
-      let text = React.findDOMNode(this.refs.skilltext).value;
-      if (this.props.profiletype === 'project') {
-        //update some data
-      }
-      if (this.props.profiletype === 'charity') {
-      }
-      if (this.props.profiletype === 'developer') {
-        if (text) {
-          Developers.update(
-             { _id: this.props.id },
-             { $push: {"profile.devSkills": text }}
-          );
-        }
-      }
-    }
-    this.setState({ edit: mode });
-  },
   removeSkill(index, type, skills) {
     let updateSkills;
     if (index < skills.length) {
@@ -52,30 +28,17 @@ Skills = React.createClass({
       }
     }
   },
-  displaySkills(skills, edit, type) {
-    let allSkills = _.map(skills, (skill,i) => {
-      return (
-        <a className="ui label" onClick={this.removeSkill.bind(null,i, type, skills)}>
-          {skill}
-          <i className="delete icon"></i>
-        </a>
-      );
-    });
-
-    if (edit) {
-      return (
-        <span>
-          <div className="skill-input ui input">
-            <input ref="skilltext" type="text" placeholder="Add a skill"/>
-          </div>
-          {allSkills}
-        </span>
-      );
-    }
-    return allSkills;
+  displaySkills(skills, type) {
+    return _.map(skills, (skill,i) => {
+        return (
+          <a className="ui label" onClick={this.removeSkill.bind(null,i, type, skills)}>
+            {skill}
+            <i className="delete icon"></i>
+          </a>
+        );
+      });
   },
   render() {
-    let edit = this.state.edit ? 'done' : 'edit';
     return (
       <div id="skills-section" className="over-views">
         <div className="inline">
@@ -90,7 +53,7 @@ Skills = React.createClass({
           <br/>
         </div>
 
-        {this.displaySkills(this.props.skilldata, this.state.edit, this.props.profiletype)}
+        {this.displaySkills(this.props.skilldata, this.props.profiletype)}
       </div>
     );
   }
