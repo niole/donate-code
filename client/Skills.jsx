@@ -11,8 +11,6 @@ Skills = React.createClass({
     if (user === profile) {
       if (index < skills.length) {
         updateSkills = skills.slice(0,index).concat(skills.slice(index+1,skills.length));
-        console.log(skills.slice(0,index));
-        console.log(updateSkills);
       } else {
         console.error('you are trying to delete something thats not in the skill array');
       }

@@ -26,11 +26,11 @@ ProfileToggle = React.createClass({
       })
     });
   },
-  displayToggle(profiletype, profileid, userid) {
+  displayToggle(profiletype, profileid, userid, data) {
     if (profiletype === 'developer' || profiletype === 'project') {
       let headerText;
-      if (profiletype === 'developer') {
         headerText = 'Projects';
+      if (profiletype === 'developer') {
       } else {
         headerText = 'Developers';
       }
@@ -54,16 +54,37 @@ ProfileToggle = React.createClass({
       return (
         <span>
           <h1 id="project-toggle">Projects</h1>
-          {(profileid === userid) ? <div className="tiny-label">edit</div> : <span/>}
+          {this.displayAddMiniProfile(profileid, userid, data)}
         </span>
       );
+    }
+  },
+  displayAddMiniProfile(profileid, userid, data) {
+    /*
+     * Determines if button should be shown.
+     * onClick, opens mock MiniProfile with a default
+     * image with a prompt for name entry.
+     * Appears in modal-like fashion over top of the
+     * mini-profiles.
+     * On display, text of add profile button is 'save'.
+     * Appearance of modal and button is determined by a change in
+     * the button component's internal state.
+     * */
+    if (profileid === userid) {
+      return <AddProfileButton
+              profileid={profileid}
+              profiletype={'charity'}
+              defaultlinks={data.profile.links}
+              defaultimage={data.profile.image}
+              />;
     }
   },
   render() {
     return (
       <span>
         <div className="title-toggle">
-          {this.displayToggle(this.props.profiletype, this.props.profileid, this.props.userid)}
+          {this.displayToggle(
+            this.props.profiletype, this.props.profileid, this.props.userid, this.props.userData)}
         </div>
         <MiniProfiles
         profiledata={this.props.userData.miniProfiles}
