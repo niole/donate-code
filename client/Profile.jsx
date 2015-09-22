@@ -6,28 +6,31 @@ Profile = React.createClass({
   mixins: [ReactMeteorData],
   getMeteorData() {
     let userData;
-    console.log(Meteor.status());
-    let serverConnection = Meteor.status();
-      console.log(this.props.profiletype);
-      switch (this.props.profiletype) {
-        case 'developer':
-          console.log('inside dev');
-          userData = Developers.find({devId: this.props.userid}).fetch();
-          break;
-        case 'charity':
-          console.log('inside charity');
-          userData = Charities.find({charityId: this.props.userid}).fetch();
-          break;
-        case 'project':
-          console.log('still need to handle project case');
-          break;
+    let res;
+    Tracker.autorun(function() {
+      console.log(Meteor.status());
+      let serverConnection = Meteor.status();
+        switch (this.props.profiletype) {
+          case 'developer':
+            userData = Developers.find({devId: this.props.userid}).fetch();
+            break;
+          case 'charity':
+            userData = Charities.find({charityId: this.props.userid}).fetch();
+            break;
+          case 'project':
+            console.log('still need to handle project case');
+            break;
+        }
+      if (serverConnection.retryCount < 1) {
+        console.log('inside retry <1');
+        res = userData[0];
+      } else {
+        console.log(serverConnection.retryTime);
+      //  setTimeout(Meteor.reconnect(), serverConnection.retryTime - (new Date()).getTime());
       }
-    console.log(userData);
-    if (serverConnection.retryCount < 1) {
-      return userData[0];
-    } else {
-      setTimeout(Meteor.reconnect(), serverConnection.retryTime - (new Date()).getTime());
-//      Meteor.reconnect();
+    }.bind(this));
+    if (res) {
+      return res;
     }
   },
   componentDidMount() {

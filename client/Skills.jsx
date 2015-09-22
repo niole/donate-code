@@ -18,6 +18,12 @@ Skills = React.createClass({
       //update some data
     }
     if (type === 'charity') {
+      if (updateSkills) {
+        Charities.update(
+           { _id: this.props.id },
+           { $set: {"profile.skills": updateSkills }}
+        );
+      }
     }
     if (type === 'developer') {
       if (updateSkills) {
