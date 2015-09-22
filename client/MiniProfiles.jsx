@@ -19,23 +19,23 @@ MiniProfiles = React.createClass({
     switch (this.props.profiletype) {
       case 'charity':
         accepted = _.map(this.props.profiledata.projects, pid => {
-          return Projects.findOne({projectId: pid});
+          return Projects.findOne({_id: pid});
         });
         break;
       case 'project':
         accepted = _.map(this.props.profiledata.acceptedDevs, did => {
-          return Developers.findOne({devId: pid});
+          return Developers.findOne({_id: pid});
         });
         pending = _.map(this.props.profiledata.pendingDevs, did => {
-          return Developers.findOne({devId: did});
+          return Developers.findOne({_id: did});
         });
         break;
       case 'developer':
         accepted = _.map(this.props.profiledata.acceptedProjects, pid => {
-          return Projects.findOne({projectId: pid});
+          return Projects.findOne({_id: pid});
         });
         pending = _.map(this.props.profiledata.pendingProjects, pid => {
-          return Projects.findOne({projectId: pid});
+          return Projects.findOne({_id: pid});
         });
         break;
     }

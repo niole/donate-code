@@ -5,8 +5,10 @@ MiniProfile = React.createClass({
   render() {
     return (
         <div>
-          <img src={this.props.profiledata.image}/>
-          {this.props.profile.data.name}
+          <div className="profile-img-container">
+            <img src={this.props.profiledata.image}/>
+          </div>
+          <p className="miniprofile-title">{this.props.profiledata.name}</p>
         </div>
     );
   }

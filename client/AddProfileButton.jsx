@@ -9,16 +9,20 @@ AddProfileButton = React.createClass({
     return { edit: false };
   },
   toggleEdit(edit, profileid, links, image) {
-    //let projectTitle = $('#projecttitle');
+    /*
+     * Adds new Projects to respective collection,
+     * updates array of projects in Charites
+     * collection, and updates edit state.
+     * */
+
+    event.preventDefault();
     let projectTitle = React.findDOMNode(this.refs.projecttitle) ?
                        React.findDOMNode(this.refs.projecttitle).value :
                        null;
-    console.log(projectTitle);
-
-    event.preventDefault();
     if (!edit) {
-      //save in database
+      let projectId = ((new Date()).getTime()).toString();
       Projects.insert({
+        _id: projectId,
         charityId: profileid,
         profile: {
           skills: [],
@@ -32,6 +36,10 @@ AddProfileButton = React.createClass({
           pendingDevs: []
         }
       });
+      Charities.update(
+        { _id: profileid },
+        {$push: { "miniProfiles.projects": projectId }}
+      );
     }
     this.setState({ edit: edit });
   },

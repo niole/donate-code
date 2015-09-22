@@ -9,28 +9,30 @@ Profile = React.createClass({
   mixins: [ReactMeteorData],
   getMeteorData() {
     let userData;
-    let res;
-//    Tracker.autorun(function() {
-      console.log(Meteor.status());
-      let serverConnection = Meteor.status();
-        switch (this.props.profiletype) {
-          case 'developer':
-            if (serverConnection.retryCount < 1) {
-              userData = Developers.find({_id: this.props.profileid}).fetch();
-              return userData[0];
-            }
-            break;
-          case 'charity':
-            if (serverConnection.retryCount < 1) {
-              userData = Charities.find({_id: this.props.profileid}).fetch();
-              console.log(userData);
-              return userData[0];
-            }
-            break;
-          case 'project':
-            console.log('still need to handle project case');
-            break;
-        }
+    console.log(Meteor.status());
+    let serverConnection = Meteor.status();
+      switch (this.props.profiletype) {
+        case 'developer':
+          if (serverConnection.retryCount < 1) {
+            userData = Developers.find({_id: this.props.profileid}).fetch();
+            return userData[0];
+          }
+          break;
+        case 'charity':
+          if (serverConnection.retryCount < 1) {
+            userData = Charities.find({_id: this.props.profileid}).fetch();
+            console.log(userData);
+            return userData[0];
+          }
+          break;
+        case 'project':
+          if (serverConnection.retryCount < 1) {
+            userData = Projects.find({_id: this.props.profileid}).fetch();
+            console.log(userData);
+            return userData[0];
+          }
+          break;
+      }
 //      if (serverConnection.retryCount < 1) {
 //        console.log('inside retry <1');
 //        res = userData[0];
@@ -44,8 +46,6 @@ Profile = React.createClass({
     }
   },
   render() {
-    console.log('this.state.userid');
-    console.log(this.state.userid);
     let containerStyle = {height: $(window).height()};
       return (
         <div className="app-container" style={containerStyle}>
