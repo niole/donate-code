@@ -41,12 +41,18 @@ MiniProfiles = React.createClass({
     }
     return {Pending: pending, Accepted: accepted};
   },
-  displayProfiles(active, pending, accepted) {
+  displayProfiles(active, pending, accepted, profiletype) {
+    let parentid = null;
     if (active) {
       if (accepted.length > 0) {
         return _.map(accepted, profile => {
+          if (profiletype === 'charity') {
+            parentid = profile.charityId
+          }
           return <MiniProfile
                   profiledata={profile.profile}
+                  profileid={profile._id}
+                  parentid={parentid}
                   />;
         });
       }
@@ -54,8 +60,13 @@ MiniProfiles = React.createClass({
     }
     if (pending.length > 0) {
       return _.map(pending, profile => {
+        if (profiletype === 'charity') {
+          parentid = profile.charityId
+        }
         return <MiniProfile
+                parentid={parentid}
                 profiledata={profile.profile}
+                profileid={profile._id}
                 />;
       });
     }
@@ -64,7 +75,7 @@ MiniProfiles = React.createClass({
   render() {
     return (
       <div className="miniprofile-container">
-         {this.displayProfiles(this.props.activeprofile, this.data.Pending, this.data.Accepted)}
+      {this.displayProfiles(this.props.activeprofile, this.data.Pending, this.data.Accepted, this.props.profiletype)}
       </div>
     );
   }

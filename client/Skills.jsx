@@ -1,6 +1,7 @@
 Skills = React.createClass({
   propTypes: {
     skilldata: React.PropTypes.array.isRequired,
+    parentid: React.PropTypes.string.isRequired,
     userid: React.PropTypes.string.isRequired,
     profileid: React.PropTypes.string.isRequired,
     usertype: React.PropTypes.string.isRequired,
@@ -54,6 +55,7 @@ Skills = React.createClass({
           <EditButton
             id={this.props.id}
             profileid={this.props.profileid}
+            parentid={this.props.parentid}
             userid={this.props.userid}
             usertype={this.props.usertype}
             profiletype={this.props.profiletype}

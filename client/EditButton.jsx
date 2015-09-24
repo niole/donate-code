@@ -1,6 +1,7 @@
 EditButton = React.createClass({
   propTypes: {
     userid: React.PropTypes.string.isRequired,
+    parentid: React.PropTypes.string.isRequired,
     profileid: React.PropTypes.string.isRequired,
     profiletype: React.PropTypes.string.isRequired,
     componenttype: React.PropTypes.string.isRequired,
@@ -96,16 +97,31 @@ EditButton = React.createClass({
     }
     this.setState({ edit: edit });
   },
-  showButton(profile, user, profiletype, edit, componenttype) {
+  showButton(parent, profile, user, profiletype, edit, componenttype) {
+
+    console.log(componenttype);
     let Edit = edit ? 'save' : 'edit';
-    if (user === profile) {
-      return (
+    let button = [
           <div id="skills-edit" className="edit tiny-label"
             onClick={this.editMode.bind(null, !edit, componenttype, profiletype, profile)}
            >
             {Edit}
           </div>
-      );
+    ];
+    if(profiletype === 'project') {
+      console.log(componenttype);
+      console.log(user);
+      console.log(parent);
+
+      if (user === parent) {
+        console.log(user);
+        console.log(parent);
+        return button;
+      }
+    } else {
+      if (user === profile) {
+        return button;
+      }
     }
   },
   showInput(edit, component, text) {
@@ -135,7 +151,7 @@ EditButton = React.createClass({
   render() {
     return (
       <div>
-        {this.showButton(this.props.profileid,this.props.userid, this.props.profiletype, this.state.edit, this.props.componenttype)}
+        {this.showButton(this.props.parentid, this.props.profileid,this.props.userid, this.props.profiletype, this.state.edit, this.props.componenttype)}
         {this.showInput(this.state.edit, this.props.componenttype, this.props.text)}
       </div>
     );

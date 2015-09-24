@@ -1,6 +1,7 @@
 Links = React.createClass({
   propTypes: {
     linkdata: React.PropTypes.array.isRequired,
+    parentid: React.PropTypes.string.isRequired,
     profiletype: React.PropTypes.string.isRequired,
     profileid: React.PropTypes.string.isRequired,
     userid: React.PropTypes.string.isRequired
@@ -64,6 +65,7 @@ Links = React.createClass({
             <EditButton
               userid={this.props.userid}
               profileid={this.props.profileid}
+              parentid={this.props.parentid}
               profiletype={this.props.profiletype}
               componenttype={'links'}
               text={null}

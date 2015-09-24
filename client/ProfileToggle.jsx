@@ -27,10 +27,14 @@ ProfileToggle = React.createClass({
     });
   },
   displayToggle(profiletype, profileid, userid, data) {
+    /*
+     * Controls header text and functionality of
+     * component
+     **/
+    let headerText;
     if (profiletype === 'developer' || profiletype === 'project') {
-      let headerText;
-        headerText = 'Projects';
       if (profiletype === 'developer') {
+        headerText = 'Projects';
       } else {
         headerText = 'Developers';
       }
@@ -61,7 +65,7 @@ ProfileToggle = React.createClass({
   },
   displayAddMiniProfile(profileid, userid, data) {
     /*
-     * Determines if button should be shown.
+     * Determines if add project button should be shown.
      * onClick, opens mock MiniProfile with a default
      * image with a prompt for name entry.
      * Appears in modal-like fashion over top of the
