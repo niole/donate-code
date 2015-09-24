@@ -30,7 +30,7 @@ Skills = React.createClass({
         if (updateSkills) {
           Developers.update(
              { _id: this.props.userid },
-             { $set: {"profile.devSkills": updateSkills }}
+             { $set: {"profile.skills": updateSkills }}
           );
         }
       }

@@ -73,7 +73,7 @@ EditButton = React.createClass({
           if (text) {
             Developers.update(
                { _id: this.props.profileid },
-               { $push: {"profile.devSkills": text }}
+               { $push: {"profile.skills": text }}
             );
           }
         }
