@@ -11,6 +11,7 @@ ProfileToggle = React.createClass({
     profiletype: React.PropTypes.string.isRequired,
     userid: React.PropTypes.string.isRequired,
     profileid: React.PropTypes.string.isRequired,
+    parentid: React.PropTypes.string.isRequired,
     userData: React.PropTypes.object.isRequired
   },
   getInitialState() {
@@ -26,7 +27,7 @@ ProfileToggle = React.createClass({
       })
     });
   },
-  displayToggle(profiletype, profileid, userid, data) {
+  displayToggle(profiletype, profileid, userid, data, parentid) {
     /*
      * Controls header text and functionality of
      * component
@@ -58,12 +59,12 @@ ProfileToggle = React.createClass({
       return (
         <span>
           <h1 id="project-toggle">Projects</h1>
-          {this.displayAddMiniProfile(profileid, userid, data)}
+          {this.displayAddMiniProfile(profileid, userid, data, parentid)}
         </span>
       );
     }
   },
-  displayAddMiniProfile(profileid, userid, data) {
+  displayAddMiniProfile(profileid, userid, data, parentid) {
     /*
      * Determines if add project button should be shown.
      * onClick, opens mock MiniProfile with a default
@@ -88,7 +89,8 @@ ProfileToggle = React.createClass({
       <span>
         <div className="title-toggle">
           {this.displayToggle(
-            this.props.profiletype, this.props.profileid, this.props.userid, this.props.userData)}
+            this.props.profiletype, this.props.profileid,
+            this.props.userid, this.props.userData, this.props.parentid)}
         </div>
         <MiniProfiles
         profiledata={this.props.userData.miniProfiles}

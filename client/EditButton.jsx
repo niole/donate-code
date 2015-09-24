@@ -151,7 +151,7 @@ EditButton = React.createClass({
   render() {
     return (
       <div>
-        {this.showButton(this.props.parentid, this.props.profileid,this.props.userid, this.props.profiletype, this.state.edit, this.props.componenttype)}
+        {this.showButton(this.props.parentid, this.props.profileid, this.props.userid, this.props.profiletype, this.state.edit, this.props.componenttype)}
         {this.showInput(this.state.edit, this.props.componenttype, this.props.text)}
       </div>
     );

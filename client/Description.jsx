@@ -3,6 +3,7 @@ Description  = React.createClass({
     description: React.PropTypes.string.isRequired,
     userid: React.PropTypes.string.isRequired,
     parentid: React.PropTypes.string.isRequired,
+    profileid: React.PropTypes.string.isRequired,
     id: React.PropTypes.string.isRequired,
     usertype: React.PropTypes.string.isRequired,
     profiletype: React.PropTypes.string.isRequired
@@ -16,6 +17,7 @@ Description  = React.createClass({
             text={this.props.description}
             id={this.props.id}
             userid={this.props.userid}
+            profileid={this.props.profileid}
             parentid={this.props.parentid}
             usertype={this.props.usertype}
             componenttype={'bio'}
