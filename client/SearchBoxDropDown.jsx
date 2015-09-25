@@ -3,9 +3,6 @@ SearchBoxDropDown = React.createClass({
     email: React.PropTypes.string.isRequired,
     name: React.PropTypes.string.isRequired
   },
-  getInitialState() {
-    return { matches: [] };
-  },
   getMatches(email, name) {
     if (email || name) {
       let matches =
@@ -13,12 +10,12 @@ SearchBoxDropDown = React.createClass({
         Projects.find({ $or: [{ "profile.name": name },{ "profile.email": email }]}).fetch()).concat(
         Developers.find({ $or: [{ "profile.name": name }, { "profile.email": email }]}).fetch());
       return _.map(matches, profile => {
-        console.log(profile);
         return (
            <div>
-            {profile.profile.image}
-            {profile.profile.name}
-            {profile.profile.profileurl}
+            <a className="ui image label" href={profile.profile.profileurl}>
+              <img src={profile.profile.image}/>
+              {profile.profile.name}
+            </a>
            </div>
         );
       });

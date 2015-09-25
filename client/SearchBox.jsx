@@ -2,6 +2,13 @@ SearchBox = React.createClass({
   getInitialState() {
     return { searchtext: '', showing: false };
   },
+  componentDidMount() {
+    $("#search-dropdown").on("mouseleave", function(event) {
+      event.preventDefault();
+      React.findDOMNode(this.refs.toplevelsearchbox).value = '';
+      this.setState({ searchtext: '', showing: false });
+    }.bind(this));
+  },
   getText(show) {
     event.preventDefault();
     let text = React.findDOMNode(this.refs.toplevelsearchbox).value;
@@ -35,9 +42,7 @@ SearchBox = React.createClass({
         <div className="ui icon input">
           <input type="text" ref="toplevelsearchbox" placeholder="Search..."/>
           <span onClick={this.getText.bind(null, !this.state.showing)}>
-            <SearchButton
-              input={this.state.showing}
-            />
+            <i className="search link icon"></i>;
           </span>
         </div>
         {this.showDropDown(this.state.searchtext, this.state.showing)}

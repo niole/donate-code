@@ -1,4 +1,7 @@
 MainLayout = React.createClass({
+  propTypes: {
+    dd: React.PropTypes.bool.isRequired
+  },
   LogOut() {
     event.preventDefault();
     AccountsTemplates.logout();
@@ -15,7 +18,9 @@ MainLayout = React.createClass({
           </a>
           <div className="right menu">
             <div className="item">
-              <SearchBox/>
+              <SearchBox
+                dd={this.props.dd}
+              />
             </div>
             <a className="ui item" onClick={this.LogOut}>
               Logout
