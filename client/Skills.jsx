@@ -47,9 +47,8 @@ Skills = React.createClass({
       });
   },
   render() {
-    console.log(this.props.userid);
     return (
-      <div id="skills-section" className="over-views">
+      <div id="skills-section" className="uppersection-views">
         <div className="inline">
           <h1>Skills</h1>
           <EditButton

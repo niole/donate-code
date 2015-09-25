@@ -58,23 +58,22 @@ Links = React.createClass({
   },
   render() {
     return (
-      <span>
-        <div id="link-section" className="over-views">
-          <div className="inline">
-            <h1>Links</h1>
-            <EditButton
-              userid={this.props.userid}
-              profileid={this.props.profileid}
-              parentid={this.props.parentid}
-              profiletype={this.props.profiletype}
-              componenttype={'links'}
-              text={null}
-            />
-          </div>
-
-          {this.displayLinks(this.props.linkdata)}
+      <div id="link-section" className="uppersection-views">
+        <div className="inline">
+          <h1>Links</h1>
+          <EditButton
+            userid={this.props.userid}
+            profileid={this.props.profileid}
+            parentid={this.props.parentid}
+            profiletype={this.props.profiletype}
+            componenttype={'links'}
+            text={null}
+          />
+          <br/>
         </div>
-      </span>
+
+        {this.displayLinks(this.props.linkdata)}
+      </div>
     );
   }
 });

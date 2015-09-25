@@ -15,10 +15,7 @@ MainLayout = React.createClass({
           </a>
           <div className="right menu">
             <div className="item">
-              <div className="ui icon input">
-                <input type="text" placeholder="Search..."/>
-                <i className="search link icon"></i>
-              </div>
+              <SearchBox/>
             </div>
             <a className="ui item" onClick={this.LogOut}>
               Logout

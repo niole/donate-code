@@ -79,8 +79,9 @@ ProfileToggle = React.createClass({
       return <AddProfileButton
               profileid={profileid}
               profiletype={'charity'}
+              email={data.profile.email}
               defaultlinks={data.profile.links}
-              defaultimage={data.profile.image}
+              defaultimage={data.profile.image[0]}
               />;
     }
   },

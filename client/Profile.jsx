@@ -11,6 +11,7 @@ Profile = React.createClass({
   getMeteorData() {
     let userData;
     Meteor.status()
+    console.log('runs getMeteorData');
     let serverConnection = Meteor.status();
     console.log(serverConnection.connected);
     if (serverConnection.connected) {
@@ -19,7 +20,6 @@ Profile = React.createClass({
         case 'developer':
           if (serverConnection.retryCount < 1) {
             userData = Developers.find({_id: this.props.profileid}).fetch();
-            console.log(userData[0].charityId);
             return { userData: userData[0]};
           }
           break;
@@ -32,8 +32,6 @@ Profile = React.createClass({
         case 'project':
           if (serverConnection.retryCount < 1) {
             userData = Projects.find({_id: this.props.profileid}).fetch();
-            console.log(userData[0]);
-            console.log(userData[0].charityId);
             return { userData: userData[0]};
           }
           break;
@@ -47,18 +45,19 @@ Profile = React.createClass({
     }
   },
   render() {
-    console.log('this.state.userid');
-    console.log(this.state.userid);
     let containerStyle = {height: $(window).height()};
       if (this.data.userData) {
-        console.log(this.state.userid);
-
         return (
           <div className="app-container" style={containerStyle}>
-
             <div className="first one-third-panel">
-              <ProfileImage profileimg={this.data.userData.profile.image}/>
+              <ProfileImage
+                profileimg={this.data.userData.profile.image}
+                profileid={this.props.profileid}
+                parentid={this.props.parentid}
+                userid={this.state.userid}
+               />
               <div className="profile-feed-container">
+
                 <ProfileToggle
                   profiletype={this.props.profiletype}
                   profileid={this.props.profileid}

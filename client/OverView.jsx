@@ -10,6 +10,9 @@ OverView = React.createClass({
     return (
       <span>
         <div className="short-views">
+          <div className="profiletitle-view">
+            <h1>{this.props.profiledata.name}</h1>
+          </div>
           <Links
             linkdata={this.props.profiledata.links}
             userid={this.props.userid}

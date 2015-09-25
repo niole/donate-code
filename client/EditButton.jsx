@@ -98,8 +98,6 @@ EditButton = React.createClass({
     this.setState({ edit: edit });
   },
   showButton(parent, profile, user, profiletype, edit, componenttype) {
-
-    console.log(componenttype);
     let Edit = edit ? 'save' : 'edit';
     let button = [
           <div id="skills-edit" className="edit tiny-label"
@@ -109,13 +107,7 @@ EditButton = React.createClass({
           </div>
     ];
     if(profiletype === 'project') {
-      console.log(componenttype);
-      console.log(user);
-      console.log(parent);
-
       if (user === parent) {
-        console.log(user);
-        console.log(parent);
         return button;
       }
     } else {
@@ -150,7 +142,7 @@ EditButton = React.createClass({
   },
   render() {
     return (
-      <div>
+      <div className="inline">
         {this.showButton(this.props.parentid, this.props.profileid, this.props.userid, this.props.profiletype, this.state.edit, this.props.componenttype)}
         {this.showInput(this.state.edit, this.props.componenttype, this.props.text)}
       </div>

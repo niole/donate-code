@@ -1,14 +1,15 @@
 AddProfileButton = React.createClass({
   propTypes: {
-    profileid: React.PropTypes.string,
-    profiletype: React.PropTypes.string,
-    defaultimage: React.PropTypes.string,
-    defaultlinks: React.PropTypes.array
+    profileid: React.PropTypes.string.isRequired,
+    email: React.PropTypes.string.isRequired,
+    profiletype: React.PropTypes.string.isRequired,
+    defaultimage: React.PropTypes.string.isRequired,
+    defaultlinks: React.PropTypes.array.isRequired
   },
   getInitialState() {
     return { edit: false };
   },
-  toggleEdit(edit, profileid, links, image) {
+  toggleEdit(edit, profileid, links, image, email) {
     /*
      * Adds new Projects to respective collection,
      * updates array of projects in Charites
@@ -27,9 +28,11 @@ AddProfileButton = React.createClass({
         profile: {
           skills: [],
           description: "Describe your project.",
+          email: email,
           links: links,
+          profileurl: "/profile/project/"+projectId+"/"+profileid,
           name: projectTitle,
-          image: image
+          image: [image]
         },
         miniProfiles: {
           acceptedDevs: [],
@@ -43,7 +46,7 @@ AddProfileButton = React.createClass({
     }
     this.setState({ edit: edit });
   },
-  displayButton(profileid, profiletype, edit, links, image) {
+  displayButton(profileid, profiletype, edit, links, image, email) {
     /*
      * button has onClick functionality which
      * toggles edit state.
@@ -54,7 +57,7 @@ AddProfileButton = React.createClass({
     return (
       <span>
         <div className="tiny-label"
-          onClick={this.toggleEdit.bind(null, !edit, profileid, links, image)}
+          onClick={this.toggleEdit.bind(null, !edit, profileid, links, image, email)}
           >
           {Edit}
         </div>
@@ -83,7 +86,7 @@ AddProfileButton = React.createClass({
     return (
       <span>
         {this.displayButton(this.props.profileid, this.props.profiletype,
-          this.state.edit, this.props.defaultlinks, this.props.defaultimage)}
+          this.state.edit, this.props.defaultlinks, this.props.defaultimage, this.props.email)}
       </span>
     );
   }
