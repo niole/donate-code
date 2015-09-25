@@ -1,7 +1,7 @@
 /* CSS declarations go here */
-div {
+/*div {
   border: 1px solid black;
-}
+}*/
 
 img {
   max-width: 100%;
@@ -100,6 +100,10 @@ h1 {
 
 #search-dropdown {
   position: absolute;
+  background-color: white;
+  width: 100%;
+  left: 0px;
+  margin-top: 37px;
   z-index: 2;
 }
 

@@ -11,11 +11,15 @@ SearchBoxDropDown = React.createClass({
         Developers.find({ $or: [{ "profile.name": name }, { "profile.email": email }]}).fetch());
       return _.map(matches, profile => {
         return (
-           <div>
-            <a className="ui image label" href={profile.profile.profileurl}>
-              <img src={profile.profile.image}/>
-              {profile.profile.name}
-            </a>
+           <div className="ui comments">
+             <div className="comment">
+               <a className="avatar" href={profile.profile.profileurl}>
+                 <img src={profile.profile.image}/>
+               </a>
+               <div className="content">
+                 <a className="author">{profile.profile.name}</a>
+               </div>
+             </div>
            </div>
         );
       });
@@ -23,9 +27,9 @@ SearchBoxDropDown = React.createClass({
   },
   render() {
     return (
-      <div id="search-dropdown">
+      <span id="search-dropdown">
         {this.getMatches(this.props.email, this.props.name)}
-      </div>
+      </span>
     );
   }
 });

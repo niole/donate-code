@@ -10,34 +10,41 @@ Profile = React.createClass({
   mixins: [ReactMeteorData],
   getMeteorData() {
     let userData;
+    let usertype;
     Meteor.status()
     console.log('runs getMeteorData');
     let serverConnection = Meteor.status();
     console.log(serverConnection.connected);
     if (serverConnection.connected) {
-      console.log('connected');
+      let charity = Charities.find({_id : this.state.userid}).fetch();
+      let dev = Developers.find({_id : this.state.userid}).fetch();
+      if (charity.length > 0) {
+        usertype = 'charity';
+      } else {
+        usertype = 'developer';
+      }
       switch (this.props.profiletype) {
         case 'developer':
           if (serverConnection.retryCount < 1) {
             userData = Developers.find({_id: this.props.profileid}).fetch();
-            return { userData: userData[0]};
+            return { userData: userData[0], userType: usertype };
           }
           break;
         case 'charity':
           if (serverConnection.retryCount < 1) {
             userData = Charities.find({_id: this.props.profileid}).fetch();
-            return { userData: userData[0]};
+            return { userData: userData[0], userType: usertype };
           }
           break;
         case 'project':
           if (serverConnection.retryCount < 1) {
             userData = Projects.find({_id: this.props.profileid}).fetch();
-            return { userData: userData[0]};
+            return { userData: userData[0], userType: usertype };
           }
           break;
       }
     }
-    return { userData: null };
+    return { userData: null, userType: null };
   },
   componentDidMount() {
     if (!Meteor.user()) {
@@ -72,6 +79,7 @@ Profile = React.createClass({
               <OverView
                 profiledata={this.data.userData.profile}
                 profiletype={this.props.profiletype}
+                usertype={this.data.userType}
                 profileid={this.props.profileid}
                 parentid={this.props.parentid}
                 userid={this.state.userid}

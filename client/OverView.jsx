@@ -4,14 +4,22 @@ OverView = React.createClass({
     userid: React.PropTypes.string.isRequired,
     parentid: React.PropTypes.string.isRequired,
     profileid: React.PropTypes.string.isRequired,
-    profiletype: React.PropTypes.string.isRequired
+    profiletype: React.PropTypes.string.isRequired,
+    usertype: React.PropTypes.string.isRequired
   },
   render() {
     return (
       <span>
         <div className="short-views">
-          <div className="profiletitle-view">
+          <div className="profiletitle-view inline">
             <h1>{this.props.profiledata.name}</h1>
+            <VolunteerButtons
+              userid={this.props.userid}
+              profileid={this.props.profileid}
+              parentid={this.props.parentid}
+              profiletype={this.props.profiletype}
+              usertype={this.props.usertype}
+            />
           </div>
           <Links
             linkdata={this.props.profiledata.links}

@@ -3,11 +3,11 @@ SearchBox = React.createClass({
     return { searchtext: '', showing: false };
   },
   componentDidMount() {
-    $("#search-dropdown").on("mouseleave", function(event) {
-      event.preventDefault();
-      React.findDOMNode(this.refs.toplevelsearchbox).value = '';
-      this.setState({ searchtext: '', showing: false });
-    }.bind(this));
+  //  $("#search-dropdown").on("mouseleave", function(event) {
+  //    event.preventDefault();
+  //    React.findDOMNode(this.refs.toplevelsearchbox).value = '';
+  //    this.setState({ searchtext: '', showing: false });
+  //  }.bind(this));
   },
   getText(show) {
     event.preventDefault();
@@ -42,10 +42,10 @@ SearchBox = React.createClass({
         <div className="ui icon input">
           <input type="text" ref="toplevelsearchbox" placeholder="Search..."/>
           <span onClick={this.getText.bind(null, !this.state.showing)}>
-            <i className="search link icon"></i>;
+            <i className="search link icon"></i>
           </span>
+          {this.showDropDown(this.state.searchtext, this.state.showing)}
         </div>
-        {this.showDropDown(this.state.searchtext, this.state.showing)}
       </div>
     );
   }
