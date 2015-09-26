@@ -19,6 +19,7 @@ OverView = React.createClass({
               parentid={this.props.parentid}
               profiletype={this.props.profiletype}
               usertype={this.props.usertype}
+              profiletitle={this.props.profiledata.name}
             />
           </div>
           <Links

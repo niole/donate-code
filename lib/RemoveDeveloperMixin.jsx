@@ -1,28 +1,26 @@
 RemoveDeveloperMixin = {
   removeDev(projectid, developerid, charityid, accepted) {
     event.preventDefault();
+    Charities.update({_id: charityid},
+                      { $pull: { "miniProfiles.developers":
+                        { devId: developerid , projectId: projectid }}});
+
     if (accepted) {
       //removes dev from all accepted lists
-      Charities.update({_id: charityid},
-                        { $pull: { "miniProfiles.developers":
-                          { devId: developerid , projectId: projectid }}});
       Projects.update({_id: projectid},
                         { $pull: { "miniProfiles.acceptedDevs":
-                          { $in: [developerid] }}});
+                          {devId: developerid}}});
       Developers.update({_id: developerid},
                         { $pull: { "miniProfiles.acceptedProjects":
-                          { $in: [projectid] }}});
+                          {projectId: projectid}}});
     } else {
       //removes dev from all pending lists
-      Charities.update({_id: charityid},
-                        { $pull: { "miniProfiles.developers":
-                          { devId: developerid , projectId: projectid }}});
       Projects.update({_id: projectid},
                         { $pull: { "miniProfiles.pendingDevs":
-                          { $in: [developerid] }}});
+                          {devId:developerid} }});
       Developers.update({_id: developerid},
                         { $pull: { "miniProfiles.pendingProjects":
-                          { $in: [projectid] }}});
+                          { projectId: projectid} }});
     }
   }
 };

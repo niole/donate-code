@@ -3,11 +3,11 @@ SearchBox = React.createClass({
     return { searchtext: '', showing: false };
   },
   componentDidMount() {
-  //  $("#search-dropdown").on("mouseleave", function(event) {
-  //    event.preventDefault();
-  //    React.findDOMNode(this.refs.toplevelsearchbox).value = '';
-  //    this.setState({ searchtext: '', showing: false });
-  //  }.bind(this));
+    $("#search-dropdown").on("mouseleave", function(event) {
+      event.preventDefault();
+      React.findDOMNode(this.refs.toplevelsearchbox).value = '';
+      this.setState({ searchtext: '', showing: false });
+    }.bind(this));
   },
   getText(show) {
     event.preventDefault();

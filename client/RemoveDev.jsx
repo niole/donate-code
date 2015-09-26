@@ -10,7 +10,7 @@ RemoveDev = React.createClass({
   },
   displayButton(text, projectid, developerid, charityid, projectname, accepted) {
     return
-        <div onClick={this.removeDev(projectid, developerid, charityid, accepted)}>
+        <div onClick={this.removeDev.bind(null, projectid, developerid, charityid, accepted)}>
           <span>{text}</span>
           <span>{projectname}</span>
          </div>;

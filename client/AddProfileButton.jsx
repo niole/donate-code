@@ -41,7 +41,7 @@ AddProfileButton = React.createClass({
       });
       Charities.update(
         { _id: profileid },
-        {$push: { "miniProfiles.projects": projectId }}
+        {$push: { "miniProfiles.projects": {projectId: projectId} }}
       );
     }
     this.setState({ edit: edit });

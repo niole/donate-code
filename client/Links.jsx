@@ -7,9 +7,7 @@ Links = React.createClass({
     userid: React.PropTypes.string.isRequired
   },
   removeLink(index, user, profile, profiletype, links) {
-    console.log('remove link');
     if (user === profile) {
-      console.log('user is profile');
       let updateSkills;
       if (index < links.length) {
         updateSkills = links.slice(0,index).concat(links.slice(index+1,links.length));

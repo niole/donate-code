@@ -149,4 +149,3 @@ EditButton = React.createClass({
     );
   }
 });
-
