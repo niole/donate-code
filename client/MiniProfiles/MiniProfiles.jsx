@@ -24,7 +24,7 @@ MiniProfiles = React.createClass({
         break;
       case 'project':
         accepted = _.map(this.props.profiledata.acceptedDevs, did => {
-          return Developers.findOne({_id: pid.projectId});
+          return Developers.findOne({_id: did.devId});
         });
         pending = _.map(this.props.profiledata.pendingDevs, did => {
           return Developers.findOne({_id: did.devId});
@@ -42,26 +42,11 @@ MiniProfiles = React.createClass({
     return {Pending: pending, Accepted: accepted};
   },
   displayProfiles(active, pending, accepted, profiletype) {
-    let parentid = "0";
-    let miniprofiletype;
     if (active) {
       if (accepted.length > 0) {
         return _.map(accepted, profile => {
-          if (profiletype === 'charity') {
-            parentid = profile.charityId
-            miniprofiletype = 'project';
-          }
-          if (profiletype === 'project') {
-            miniprofiletype = 'developer';
-          }
-          if (profiletype === 'developer') {
-            miniprofiletype = 'project';
-          }
           return <MiniProfile
-                  profiletype={miniprofiletype}
                   profiledata={profile.profile}
-                  profileid={profile._id}
-                  parentid={parentid}
                   />;
         });
       }
@@ -69,22 +54,8 @@ MiniProfiles = React.createClass({
     }
     if (pending.length > 0) {
       return _.map(pending, profile => {
-          if (profiletype === 'charity') {
-            parentid = profile.charityId
-            miniprofiletype = 'project';
-          }
-          if (profiletype === 'project') {
-            miniprofiletype = 'developer';
-          }
-          if (profiletype === 'developer') {
-            miniprofiletype = 'project';
-          }
-
         return <MiniProfile
-                profiletype={miniprofiletype}
-                parentid={parentid}
                 profiledata={profile.profile}
-                profileid={profile._id}
                 />;
       });
     }

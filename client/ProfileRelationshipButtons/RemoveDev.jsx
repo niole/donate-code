@@ -9,11 +9,12 @@ RemoveDev = React.createClass({
     accepted: React.PropTypes.bool.isRequired
   },
   displayButton(text, projectid, developerid, charityid, projectname, accepted) {
-    return
+    return (
         <div onClick={this.removeDev.bind(null, projectid, developerid, charityid, accepted)}>
           <span>{text}</span>
           <span>{projectname}</span>
-         </div>;
+         </div>
+    );
   },
   render() {
     return (

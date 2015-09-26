@@ -5,17 +5,19 @@ VolunteerStatus = React.createClass({
   },
   showStatus(developerid, charityid) {
     //get all associations in miniProfiles.developers with developer id
-    let projects = Charities.find( {_id: charityid},
+    let charity = Charities.findOne( {_id: charityid},
                                    { "miniProfiles.developers": {
-                                      $elemMatch: { devId: developerid }}}).fetch();
-    if (projects.length > 0) {
-      return _.map(projects, project => {
+                                      $elemMatch: { devId: developerid }}});
+    if (charity) {
+      return _.map(charity.miniProfiles.developers, project => {
+        console.log('project infomration from dveloper array in charites');
+        console.log(project);
         if (project.accepted) {
           return <RemoveDev
                   text={'remove from '}
                   projectname={project.projectName}
                   projectid={project.projectId}
-                  developerid={developerid}
+                  developerid={project.devId}
                   charityid={charityid}
                   accepted={project.accepted}
                  />;
@@ -26,14 +28,14 @@ VolunteerStatus = React.createClass({
                     text={'add to '}
                     projectname={project.projectName}
                     projectid={project.projectId}
-                    developerid={developerid}
+                    developerid={project.devId}
                     charityid={charityid}
                   />
                   <RemoveDev
                     text={'reject from '}
                     projectname={project.projectName}
                     projectid={project.projectId}
-                    developerid={developerid}
+                    developerid={project.devId}
                     charityid={charityid}
                     accepted={project.accepted}
                    />
