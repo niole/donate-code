@@ -1,24 +1,18 @@
 RemoveProfileButton = React.createClass({
+  mixins: [RemoveProjectMixin],
   propTypes: {
-    profileid: React.PropTypes.string.isRequired,
-    parentid: React.PropTypes.string.isRequired,
     userid: React.PropTypes.string.isRequired,
-    profiletype: React.PropTypes.string.isRequired
+    miniprofid: React.PropTypes.string.isRequired
   },
-  removeProfile() {
+  removeProfile(charityid, projectid) {
     event.preventDefault();
-    if (parentid !== "0") {
-      //parentid is a thiat of a charity, mini profile is developer
-      //user is a charity
-    } else {
-      //mini profile is a project, user is a charity or a developer
-    }
+    //for now, only works for charities and projects
+    this.removeProject(charityid, projectid);
   },
   render() {
     return (
       <i className="remove icon"
-          onClick={this.removeProfile.bind(null,this.props.profileid, this.props.parentid,
-                                           this.props.userid, this.props.profiletype)}></i>
+          onClick={this.removeProfile.bind(null, this.props.userid, this.props.miniprofid)}></i>
     );
   }
 });

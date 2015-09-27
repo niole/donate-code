@@ -2,17 +2,15 @@ MiniProfile = React.createClass({
   propTypes: {
     profiledata: React.PropTypes.object.isRequired,
     profiletype: React.PropTypes.object.isRequired,
-    parentid: React.PropTypes.object.isRequired,
     userid: React.PropTypes.object.isRequired,
+    miniprofid: React.PropTypes.object.isRequired,
     profileid: React.PropTypes.object.isRequired
   },
-  showRemoveProfileButton(profileid, parentid, userid, profiletype) {
-    if (userid === profileid || parentid === userid) {
+  showRemoveProfileButton(profileid, userid, profiletype, miniprofid) {
+    if (userid === profileid && profiletype === 'charity') {
       return <RemoveProfileButton
-              profileid={profileid}
-              parentid={parentid}
+              miniprofid={miniprofid}
               userid={userid}
-              profiletype={profiletype}
               />;
     }
   },
@@ -23,8 +21,8 @@ MiniProfile = React.createClass({
             <img src={this.props.profiledata.image}/>
           </a>
           <p className="miniprofile-title">{this.props.profiledata.name}</p>
-          {this.showRemoveProfileButton(this.props.profileid, this.props.parentid,
-                                        this.props.userid, this.props.profiletype)}
+          {this.showRemoveProfileButton(this.props.profileid, this.props.userid, this.props.profiletype,
+                                                                                 this.props.miniprofid)}
         </div>
     );
   }
