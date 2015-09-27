@@ -44,7 +44,7 @@ MiniProfiles = React.createClass({
     }
     return {Pending: pending, Accepted: accepted};
   },
-  displayProfiles(active, pending, accepted, profiletype, userid, profileid, parentid, profiletype) {
+  displayProfiles(active, pending, accepted, userid, profileid, parentid, profiletype) {
     if (active) {
       if (accepted.length > 0) {
         return _.map(accepted, profile => {
@@ -76,7 +76,7 @@ MiniProfiles = React.createClass({
     return (
       <div className="miniprofile-container">
       {this.displayProfiles(this.props.activeprofile, this.data.Pending,
-                            this.data.Accepted, this.props.profiletype, this.props.userid,
+                            this.data.Accepted, this.props.userid,
                            this.props.profileid, this.props.parentid, this.props.profiletype)}
       </div>
     );
