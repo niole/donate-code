@@ -129,15 +129,18 @@ EditButton = React.createClass({
         return (
            <div className="ui form">
             <div className={"field "+component+"-textarea"}>
-              <textarea ref="newprofiledata">{this.props.text}</textarea>
+              <textarea ref="newprofiledata">{text}</textarea>
             </div>
           </div>
         );
       }
-    } else {
-      if (component === 'bio') {
-        return <p className="bio-textarea">{text}</p>;
-      }
+    }
+    if (component === 'bio') {
+      return(
+        <div className="ui raised segment">
+          <p className="bio-textarea">{text}</p>
+        </div>
+      );
     }
   },
   render() {

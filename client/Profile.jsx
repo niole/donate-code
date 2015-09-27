@@ -41,16 +41,18 @@ Profile = React.createClass({
           break;
       }
     } else {
-      if (serverConnection !== 'failed') {
-        Meteor.reconnect();
-      }
+      return { userData: null, userType: null };
     }
-//    return { userData: null, userType: null };
   },
   componentDidMount() {
     let serverConnection = Meteor.status();
     if (!Meteor.user() && serverConnection.connected) {
       FlowRouter.go('/');
+    } else {
+      if (serverConnection !== 'failed') {
+        console.log(Meteor.status());
+        Meteor.reconnect();
+      }
     }
   },
   render() {
@@ -91,7 +93,7 @@ Profile = React.createClass({
           </div>
         );
       } else {
-        return <p>loading</p>;
+        return <p>something wrong with server client connectivity</p>;
       }
   }
 });

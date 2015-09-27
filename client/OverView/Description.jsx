@@ -8,6 +8,14 @@ Description  = React.createClass({
     usertype: React.PropTypes.string.isRequired,
     profiletype: React.PropTypes.string.isRequired
   },
+  showNonEditingAbout(about, userid, parentid, profileid) {
+    if (userid !== parentid || userid !== profileid) {
+      return
+        <div className="ui raised segment">
+          <p>{about}</p>
+        </div>;
+    }
+  },
   render() {
     return (
       <div id="bio-section" className="over-views">
@@ -24,6 +32,8 @@ Description  = React.createClass({
             profiletype={this.props.profiletype}
           />
         </div>
+        {this.showNonEditingAbout(this.props.description, this.props.userid, this.props.parentid,
+                                                                            this.props.profileid)}
       </div>
     );
   }

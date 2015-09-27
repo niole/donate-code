@@ -57,7 +57,11 @@ MiniProfiles = React.createClass({
                   />;
         });
       }
-      return <p>nothing active</p>;
+      return(
+        <div id="mini-pending" className="ui raised segment">
+          <p className="pending-text">nothing active</p>
+        </div>
+      );
     }
     if (pending.length > 0) {
       return _.map(pending, profile => {
@@ -70,7 +74,11 @@ MiniProfiles = React.createClass({
                 />;
       });
     }
-    return <p>nothing pending</p>;
+    return (
+      <div className="ui raised segment" id="mini-pending">
+        <p className="pending-text">nothing pending</p>
+      </div>
+    );
   },
   render() {
     return (

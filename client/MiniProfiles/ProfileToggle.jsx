@@ -35,21 +35,20 @@ ProfileToggle = React.createClass({
     let headerText;
     if (profiletype === 'developer' || profiletype === 'project') {
       if (profiletype === 'developer') {
-        headerText = 'Projects';
+        headerText = ' projects';
       } else {
-        headerText = 'Developers';
+        headerText = ' developers';
       }
       return (
         <span>
-          <h1>{headerText}</h1>
           <div className="ui secondary pointing menu">
-            <a className={this.state.menuToggle[0] ? "active item" : "item"}
+            <a className={this.state.menuToggle[0] ? "active item toggle-title" : "item toggle-title"}
               onClick={this.state.menuToggle[1] ? this.Toggle.bind(null,0) : null}>
-              active
+              {'active'+headerText}
             </a>
-            <a className={this.state.menuToggle[1] ? "active item" : "item"}
+            <a className={this.state.menuToggle[1] ? "active item toggle-title" : "item toggle-title"}
               onClick={this.state.menuToggle[0] ? this.Toggle.bind(null,1) : null}>
-              pending
+              {'pending'+headerText}
             </a>
           </div>
         </span>

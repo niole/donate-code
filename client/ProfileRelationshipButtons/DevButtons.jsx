@@ -34,7 +34,7 @@ DevButtons = React.createClass({
   },
   render() {
     return (
-      <div>
+      <div className="inline">
         {this.showButton(this.props.developerid, this.props.projectid, this.props.charityid,
                                                                     this.props.projecttitle)}
       </div>

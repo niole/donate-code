@@ -23,14 +23,7 @@ VolunteerStatus = React.createClass({
                  />;
         } else {
           return (
-                <div>
-                  <AcceptDev
-                    text={'add to '}
-                    projectname={project.projectName}
-                    projectid={project.projectId}
-                    developerid={project.devId}
-                    charityid={charityid}
-                  />
+                <div className="inline">
                   <RemoveDev
                     text={'reject from '}
                     projectname={project.projectName}
@@ -39,6 +32,13 @@ VolunteerStatus = React.createClass({
                     charityid={charityid}
                     accepted={project.accepted}
                    />
+                  <AcceptDev
+                    text={'add to '}
+                    projectname={project.projectName}
+                    projectid={project.projectId}
+                    developerid={project.devId}
+                    charityid={charityid}
+                  />
                </div>
           );
         }
@@ -47,7 +47,7 @@ VolunteerStatus = React.createClass({
   },
   render() {
     return (
-      <div id="volunteer-status">
+      <div id="volunteer-status" className="inline">
         {this.showStatus(this.props.developerid, this.props.charityid)}
       </div>
     );

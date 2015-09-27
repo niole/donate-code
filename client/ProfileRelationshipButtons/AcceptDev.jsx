@@ -16,11 +16,11 @@ AcceptDev = React.createClass({
   },
   render() {
     return (
-      <div onClick={this.addDeveloper.bind(null, this.props.developerid, this.props.projectid,
+      <button className="ui positive button inline" onClick={this.addDeveloper.bind(null, this.props.developerid, this.props.projectid,
                 this.props.charityid, this.props.projectname)}>
         {this.props.text}
         {this.props.projectname}
-      </div>
+      </button>
     );
   }
 });

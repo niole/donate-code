@@ -12,9 +12,9 @@ LeaveProjectButton = React.createClass({
   },
   render() {
     return (
-      <div onClick={this.leaveProject.bind(null, this.props.developerid, this.props.projectid, this.props.charityid)}>
+      <button className="ui teal button" onClick={this.leaveProject.bind(null, this.props.developerid, this.props.projectid, this.props.charityid)}>
         Leave Project
-      </div>
+      </button>
     );
   }
 });

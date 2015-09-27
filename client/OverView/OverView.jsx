@@ -12,7 +12,7 @@ OverView = React.createClass({
       <span>
         <div className="short-views">
           <div className="profiletitle-view inline">
-            <h1>{this.props.profiledata.name}</h1>
+            <h1 id="profile-title">{this.props.profiledata.name}</h1>
             <VolunteerButtons
               userid={this.props.userid}
               profileid={this.props.profileid}

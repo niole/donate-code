@@ -7,39 +7,44 @@ Skills = React.createClass({
     usertype: React.PropTypes.string.isRequired,
     profiletype: React.PropTypes.string.isRequired
   },
-  removeSkill(index, type, skills, user, profile) {
+  removeSkill(index, type, skills, user, profile, parent) {
     let updateSkills;
-    if (user === profile) {
-      if (index < skills.length) {
-        updateSkills = skills.slice(0,index).concat(skills.slice(index+1,skills.length));
-      } else {
-        console.error('you are trying to delete something thats not in the skill array');
+    if (index < skills.length) {
+      updateSkills = skills.slice(0,index).concat(skills.slice(index+1,skills.length));
+    } else {
+      console.error('you are trying to delete something thats not in the skill array');
+    }
+    if (type === 'project') {
+      //update some data
+      if (updateSkills && user === parent) {
+        Projects.update(
+           { _id: profile },
+           { $set: {"profile.skills": updateSkills }}
+        );
       }
-      if (type === 'project') {
-        //update some data
+    }
+    if (type === 'charity') {
+      if (updateSkills && user === profile) {
+        Charities.update(
+           { _id: user },
+           { $set: {"profile.skills": updateSkills }}
+        );
       }
-      if (type === 'charity') {
-        if (updateSkills) {
-          Charities.update(
-             { _id: this.props.userid },
-             { $set: {"profile.skills": updateSkills }}
-          );
-        }
-      }
-      if (type === 'developer') {
-        if (updateSkills) {
-          Developers.update(
-             { _id: this.props.userid },
-             { $set: {"profile.skills": updateSkills }}
-          );
-        }
+    }
+    if (type === 'developer' && user === profile) {
+      if (updateSkills) {
+        Developers.update(
+           { _id: user },
+           { $set: {"profile.skills": updateSkills }}
+        );
       }
     }
   },
-  displaySkills(skills, type, user, profile) {
+  displaySkills(skills, profiletype, userid, profileid, parentid) {
     return _.map(skills, (skill,i) => {
         return (
-          <a className="ui label" onClick={this.removeSkill.bind(null,i, type, skills, user, profile)}>
+          <a className="ui label" onClick={this.removeSkill.bind(null,i, profiletype, skills, userid,
+                                                                                profileid, parentid)}>
             {skill}
             <i className="delete icon"></i>
           </a>
@@ -63,8 +68,10 @@ Skills = React.createClass({
           />
           <br/>
         </div>
-
-        {this.displaySkills(this.props.skilldata, this.props.profiletype, this.props.userid, this.props.profileid)}
+        <div className="ui raised segment details-container">
+          {this.displaySkills(this.props.skilldata, this.props.profiletype,
+              this.props.userid, this.props.profileid, this.props.parentid)}
+        </div>
       </div>
     );
   }

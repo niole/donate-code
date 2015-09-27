@@ -8,20 +8,13 @@ RemoveDev = React.createClass({
     charityid: React.PropTypes.string.isRequired,
     accepted: React.PropTypes.bool.isRequired
   },
-  displayButton(text, projectid, developerid, charityid, projectname, accepted) {
-    return (
-        <div onClick={this.removeDev.bind(null, projectid, developerid, charityid, accepted)}>
-          <span>{text}</span>
-          <span>{projectname}</span>
-         </div>
-    );
-  },
   render() {
     return (
-      <div>
-        {this.displayButton(this.props.text, this.props.projectid, this.props.developerid,
-                              this.props.charityid, this.props.projectname, this.props.accepted)}
-      </div>
+      <button className="ui button inline" onClick={this.removeDev.bind(null, this.props.projectid, this.props.developerid,
+                                                this.props.charityid, this.props.accepted)}>
+        <span>{this.props.text}</span>
+        <span>{this.props.projectname}</span>
+      </button>
     );
   }
 });

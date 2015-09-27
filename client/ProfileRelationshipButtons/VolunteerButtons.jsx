@@ -8,19 +8,13 @@ VolunteerButtons = React.createClass({
     profiletitle: React.PropTypes.string.isRequired
   },
   showButtons(parentid, userid, profileid, profiletype, usertype, profiletitle) {
-    console.log('profileid');
-    console.log(profileid);
-
-    console.log('showbuttons');
     if (usertype === 'charity' && profiletype === 'developer') {
-      console.log('developer charity');
       return <VolunteerStatus
               developerid={profileid}
               charityid={userid}
              />;
     }
     if (usertype === 'developer' && profiletype === 'project') {
-      console.log('developer project');
       return (
         <DevButtons
           projecttitle={profiletitle}
@@ -32,11 +26,9 @@ VolunteerButtons = React.createClass({
     }
   },
   render() {
-    console.log('this.props.profileid');
-    console.log(this.props.profileid);
     return (
 
-      <div id="volunteer buttons">
+      <div id="volunteer buttons" className="inline">
         {this.showButtons(this.props.parentid, this.props.userid,
             this.props.profileid, this.props.profiletype, this.props.usertype,this.props.profiletitle)}
       </div>

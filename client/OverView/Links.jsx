@@ -6,36 +6,40 @@ Links = React.createClass({
     profileid: React.PropTypes.string.isRequired,
     userid: React.PropTypes.string.isRequired
   },
-  removeLink(index, user, profile, profiletype, links) {
-    if (user === profile) {
-      let updateSkills;
-      if (index < links.length) {
-        updateSkills = links.slice(0,index).concat(links.slice(index+1,links.length));
-      } else {
-        console.error('you are trying to delete something thats not in the skill array');
+  removeLink(index, user, profile, parent, profiletype, links) {
+    let updateSkills;
+    if (index < links.length) {
+      updateSkills = links.slice(0,index).concat(links.slice(index+1,links.length));
+    } else {
+      console.error('you are trying to delete something thats not in the skill array');
+    }
+    if (profiletype === 'project') {
+      //update some data
+      if (updateSkills && user === parent) {
+        Projects.update(
+           { _id: profile },
+           { $set: {"profile.links": updateSkills }}
+        );
       }
-      if (profiletype === 'project') {
-        //update some data
+    }
+    if (profiletype === 'charity') {
+      if (updateSkills && user === profile) {
+        Charities.update(
+           { _id: user },
+           { $set: {"profile.links": updateSkills }}
+        );
       }
-      if (profiletype === 'charity') {
-        if (updateSkills) {
-          Charities.update(
-             { _id: user },
-             { $set: {"profile.links": updateSkills }}
-          );
-        }
-      }
-      if (profiletype === 'developer') {
-        if (updateSkills) {
-          Developers.update(
-             { _id: user },
-             { $set: {"profile.links": updateSkills }}
-          );
-        }
+    }
+    if (profiletype === 'developer' && user === profile) {
+      if (updateSkills) {
+        Developers.update(
+           { _id: user },
+           { $set: {"profile.links": updateSkills }}
+        );
       }
     }
   },
-  displayLinks(data) {
+  displayLinks(data, userid, profileid, profiletype, parentid) {
     if (data.length > 0) {
       return _.map(data, (link,i) => {
         return (
@@ -45,7 +49,7 @@ Links = React.createClass({
                 {link}
             </a>
             <i className="delete icon delete-link"
-              onClick={this.removeLink.bind(null, i, this.props.userid, this.props.profileid,this.props.profiletype, data)}
+              onClick={this.removeLink.bind(null, i, userid, profileid, parentid, profiletype, data)}
             >
             </i>
           </div>
@@ -69,8 +73,10 @@ Links = React.createClass({
           />
           <br/>
         </div>
-
-        {this.displayLinks(this.props.linkdata)}
+        <div className="ui raised segment">
+          {this.displayLinks(this.props.linkdata, this.props.userid, this.props.profileid,
+                                              this.props.profiletype, this.props.parentid)}
+        </div>
       </div>
     );
   }

@@ -13,10 +13,10 @@ VolunteerButton = React.createClass({
   },
   render() {
     return (
-      <div onClick={this.addToPending.bind(null, this.props.developerid, this.props.charityid, this.props.projectid,
+      <button className="ui green button" onClick={this.addToPending.bind(null, this.props.developerid, this.props.charityid, this.props.projectid,
                                                                                 this.props.projectname)}>
         Volunteer
-      </div>
+      </button>
     );
   }
 });
