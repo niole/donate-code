@@ -7,7 +7,7 @@ Profile = React.createClass({
   getInitialState() {
     return { userid: Meteor.userId() };
   },
-  mixins: [ReactMeteorData, PrintMixin],
+  mixins: [ReactMeteorData],
   getMeteorData() {
     let userData;
     let usertype;
