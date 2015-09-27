@@ -7,7 +7,7 @@ Profile = React.createClass({
   getInitialState() {
     return { userid: Meteor.userId() };
   },
-  mixins: [ReactMeteorData, GleanProfileMixin],
+  mixins: [ReactMeteorData, PrintMixin],
   getMeteorData() {
     let userData;
     let usertype;
@@ -40,8 +40,12 @@ Profile = React.createClass({
           }
           break;
       }
+    } else {
+      if (serverConnection !== 'failed') {
+        Meteor.reconnect();
+      }
     }
-    return { userData: null, userType: null };
+//    return { userData: null, userType: null };
   },
   componentDidMount() {
     let serverConnection = Meteor.status();
