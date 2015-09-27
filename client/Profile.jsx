@@ -7,14 +7,11 @@ Profile = React.createClass({
   getInitialState() {
     return { userid: Meteor.userId() };
   },
-  mixins: [ReactMeteorData],
+  mixins: [ReactMeteorData, GleanProfileMixin],
   getMeteorData() {
     let userData;
     let usertype;
-    Meteor.status()
-    console.log('runs getMeteorData');
     let serverConnection = Meteor.status();
-    console.log(serverConnection.connected);
     if (serverConnection.connected) {
       let charity = Charities.find({_id : this.state.userid}).fetch();
       let dev = Developers.find({_id : this.state.userid}).fetch();
@@ -47,8 +44,9 @@ Profile = React.createClass({
     return { userData: null, userType: null };
   },
   componentDidMount() {
-    if (!Meteor.user()) {
-    //  FlowRouter.go('/');
+    let serverConnection = Meteor.status();
+    if (!Meteor.user() && serverConnection.connected) {
+      FlowRouter.go('/');
     }
   },
   render() {
@@ -58,6 +56,7 @@ Profile = React.createClass({
           <div className="app-container" style={containerStyle}>
             <div className="first one-third-panel">
               <ProfileImage
+                profiletype={this.props.profiletype}
                 profileimg={this.data.userData.profile.image}
                 profileid={this.props.profileid}
                 parentid={this.props.parentid}

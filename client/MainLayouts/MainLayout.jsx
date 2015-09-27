@@ -5,14 +5,19 @@ MainLayout = React.createClass({
   },
   goHome() {
     event.preventDefault();
-    let userId = Meteor.userId();
-    let dev = Developers.find({ _id: userId }).fetch();
-    let charity = Charities.find({ _id: userId }).fetch();
-    if (dev.length > 0) {
-      FlowRouter.go('/profile/developer/'+userId+'/0');
-    }
-    if (charity.length > 0) {
-      FlowRouter.go('/profile/charity/'+userId+'/0');
+    let userid = Meteor.userId();
+    this.gleanProfile(userid);
+  },
+  gleanProfile(userid) {
+    let id = {_id: userid};
+    let dev = Developers.findOne(id);
+    let charity = Charities.findOne(id);
+    if (dev) {
+      FlowRouter.go('/profile/developer/'+userid+'/0');
+    } else {
+      if (charity) {
+        FlowRouter.go('/profile/charity/'+userid+'/0');
+      }
     }
   },
   render() {
