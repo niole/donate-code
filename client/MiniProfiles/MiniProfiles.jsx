@@ -9,7 +9,10 @@ MiniProfiles = React.createClass({
   propTypes: {
     activeprofile: React.PropTypes.bool.isRequired,
     profiledata: React.PropTypes.object.isRequired,
-    profiletype: React.PropTypes.string.isRequired
+    profiletype: React.PropTypes.string.isRequired,
+    userid: React.PropTypes.string.isRequired,
+    profileid: React.PropTypes.string.isRequired,
+    parentid: React.PropTypes.string.isRequired
   },
   mixins: [ReactMeteorData],
   getMeteorData() {
@@ -41,11 +44,15 @@ MiniProfiles = React.createClass({
     }
     return {Pending: pending, Accepted: accepted};
   },
-  displayProfiles(active, pending, accepted, profiletype) {
+  displayProfiles(active, pending, accepted, profiletype, userid, profileid, parentid, profiletype) {
     if (active) {
       if (accepted.length > 0) {
         return _.map(accepted, profile => {
           return <MiniProfile
+                  profiletype={profiletype}
+                  parentid={parentid}
+                  userid={userid}
+                  profileid={profileid}
                   profiledata={profile.profile}
                   />;
         });
@@ -55,6 +62,10 @@ MiniProfiles = React.createClass({
     if (pending.length > 0) {
       return _.map(pending, profile => {
         return <MiniProfile
+                profiletype={profiletype}
+                parentid={parentid}
+                userid={userid}
+                profileid={profileid}
                 profiledata={profile.profile}
                 />;
       });
@@ -64,7 +75,9 @@ MiniProfiles = React.createClass({
   render() {
     return (
       <div className="miniprofile-container">
-      {this.displayProfiles(this.props.activeprofile, this.data.Pending, this.data.Accepted, this.props.profiletype)}
+      {this.displayProfiles(this.props.activeprofile, this.data.Pending,
+                            this.data.Accepted, this.props.profiletype, this.props.userid,
+                           this.props.profileid, this.props.parentid, this.props.profiletype)}
       </div>
     );
   }
